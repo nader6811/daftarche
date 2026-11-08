@@ -61,7 +61,28 @@ button{cursor:pointer}
 .brand svg{width:26px;height:26px;border-radius:7px}
 .today{font-size:12.5px;color:var(--muted);text-align:end;white-space:nowrap;line-height:1.5}
 .hd-end{display:flex;align-items:center;gap:10px}
-.langbtn{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;font-weight:800;font-size:13px;padding:6px 10px;color:var(--brand);min-width:44px}
+.langbtn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--gold);background:var(--surface);border-radius:12px;font-weight:800;font-size:13px;padding:7px 11px;color:var(--brand);white-space:nowrap}
+.langbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+.top{flex-wrap:wrap}
+.langs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.langopt{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:16px 14px;display:flex;flex-direction:column;gap:2px;text-align:start}
+.langopt b{font-size:18px}.langopt span{font-size:12.5px;color:var(--muted)}
+.langopt[aria-pressed="true"]{border-color:var(--gold);background:var(--accent-soft)}
+.voice{background:#14213d;color:#f4ecdc;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(227,197,141,.35)}
+.voice-top{display:flex;align-items:center;gap:14px;background:none;border:0;color:inherit;padding:0;text-align:start;width:100%}
+.micbig{width:72px;height:72px;border-radius:50%;background:#e3c58d;display:grid;place-items:center;flex:none;box-shadow:0 0 0 7px rgba(227,197,141,.18)}
+.micbig svg{width:32px;height:32px;stroke:#14213d;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.voice.on .micbig{background:#f0503c;animation:pulse 1.1s infinite}.voice.on .micbig svg{stroke:#fff}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,80,60,.55)}100%{box-shadow:0 0 0 18px rgba(240,80,60,0)}}
+@media (prefers-reduced-motion: reduce){.voice.on .micbig{animation:none}}
+.voice-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.voice-t b{font-size:20px;line-height:1.3}.voice-t span{font-size:13px;color:#cfd6e4}
+.voice textarea{background:#ffffff;color:#111a2e;border-radius:14px;padding:11px 13px;min-height:58px;font:inherit;font-size:16px;border:0;width:100%;resize:none;outline:none}
+.voice textarea::placeholder{color:#7b8496}
+.voice textarea:focus{box-shadow:0 0 0 2px #e3c58d}
+.vrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vhint{font-size:13px;color:#e3c58d;font-weight:700;min-height:1em;flex:1}
+.vrow .btn{background:#e3c58d;color:#14213d;flex:none;padding:10px 22px}
 .store{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:2px}
 .store i{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block}
 .store.ok i{background:var(--pos)}
@@ -223,7 +244,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
       <div class="brand"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#14213d"/><g stroke="#e3c58d" stroke-width="9" stroke-linecap="round"><path d="M22 42v16"/><path d="M36 30v40"/><path d="M50 18v64"/><path d="M64 30v40"/><path d="M78 42v16"/></g></svg><span>Say<em>Pay</em></span></div>
       <div class="store" id="store"><i></i><span>در حال آماده‌سازی…</span></div>
     </div>
-    <div class="hd-end"><button class="langbtn" id="langbtn" data-act="lang" translate="no">EN</button><div class="today" id="today"></div></div>
+    <div class="hd-end"><button class="langbtn" id="langbtn" data-act="lang" translate="no" aria-label="Language / زبان"></button><div class="today" id="today"></div></div>
   </header>
   <main id="view"></main>
 </div>
@@ -258,10 +279,18 @@ const TAGS = ['شخصی','کار','قبض','قسط','خرید'];
 const catOf = k => (k==='loan'&&(k='debt'), OUT.find(c=>c.k===k) || IN.find(c=>c.k===k) || {k:'other',n:'سایر',c:8});
 const col = c => `var(--c${c})`;
 
-/* ---------- language: Persian / English ---------- */
+/* ---------- language: Persian / English / Russian / Arabic ---------- */
 let LANG = (()=>{ try{ return localStorage.getItem('saypay.lang')||'fa'; }catch(e){ return 'fa'; } })();
-const EN = () => LANG==='en';
-const DICT = {
+if(!['fa','en','ru','ar'].includes(LANG)) LANG='fa';
+const EN = () => LANG!=='fa';
+const RTL = () => LANG==='fa' || LANG==='ar';
+const LOC = {fa:'fa-IR', en:'en-US', ru:'ru-RU', ar:'ar-EG'};
+const LANG_NAMES = {fa:'فارسی', en:'English', ru:'Русский', ar:'العربية'};
+const DICT_EN = {
+  'برای گفتن بزنید':'Tap to speak','در حال شنیدن… دوباره بزنید تا تمام شود':'Listening… tap again to finish','یا اینجا بنویسید':'or type here','زبان':'Language',
+  'چیزی شنیده نشد. دوباره امتحان کنید.':'Nothing heard. Try again.',
+  'کیبورد باز شد. با دکمه کره به Gboard بروید و میکروفون آن را بزنید.':'The keyboard is open. Switch to Gboard with the globe key and tap its microphone.',
+  'میکروفون اینجا در دسترس نیست. روی کادر بزنید و از میکروفون کیبورد استفاده کنید.':'Microphone is not available here. Tap the box and use your keyboard microphone.',
   // nav & headers
   'خانه':'Home','دخل و خرج':'Money','کارها':'Tasks','بودجه و هدف':'Budget','افزودن':'Add','بخش‌ها':'Sections',
   'ذخیره روی همین گوشی':'Saved on this phone','آفلاین · ذخیره روی همین گوشی':'Offline · saved on this phone','در حال آماده‌سازی…':'Loading…',
@@ -348,17 +377,90 @@ const DICT = {
   'دفتر مالی':'Ledger','خلاصه':'Summary','ماه':'Month','هزینه کل':'Total expense','هزینه ویلا':'Villa expense','جمع هزینه':'Total',
   'مبلغ (تومان) ':'Amount (Toman)','وضعیت':'Status','باز':'Open','از SayPay':'from SayPay',
 };
-const PATTERNS = [
-  [/^(.+) مورد ثبت شد$/,'$1 items saved'],[/^(.+) مورد وارد شد$/,'$1 items imported'],[/^(.+) مورد پیدا شد$/,'$1 items found'],
-  [/^(.+) مورد در فایل پیدا شد\.$/,'$1 items found in the file.'],[/^(.+) هزینه آماده ورود$/,'$1 expenses ready to import'],[/^وارد کردن (.+) مورد$/,'Import $1 items'],
-  [/^(.+) مورد ویلا$/,'$1 villa items'],[/^(.+) مورد تکراری کنار گذاشته شد$/,'$1 duplicates skipped'],[/^(.+) یادآور برای تقویم آماده شد$/,'$1 reminders ready for Calendar'],
-  [/^(.+) قبض یا قسط در ۷ روز آینده سررسید دارد\.$/,'$1 bills or installments are due in the next 7 days.'],
-  [/^مبلغ را (.+) در نظر گرفتم؛ اگر درست نیست اصلاحش کنید\.$/,'I read the amount as $1. Correct it if that is wrong.'],
-  [/^از (.+) تا (.+)$/,'From $1 to $2'],[/^جمع (.+)$/,'Total $1'],[/^خرج (.+): (.+)$/,'Spent in $1: $2'],[/^خرج (.+)$/,'Spent $1'],
-  [/^مانده: (.+)$/,'Left: $1'],[/^مانده (.+)$/,'Balance · $1'],[/^ساعت (.+)$/,'at $1'],[/^نوبت بعدی: (.+)$/,'Next: $1'],[/^بیشینه: (.+)$/,'Max: $1'],
-  [/^(.+) از (.+) تومان$/,'$1 of $2 Toman'],[/^موجودی فعلی: (.+) از (.+)$/,'Current: $1 of $2'],[/^(.+)٪ بیش از سقف$/,'$1% over limit'],
-  [/^سقف ماهانه «(.+)»$/,'Monthly limit: $1'],[/^واریز به «(.+)»$/,'Deposit to "$1"'],[/^(.+) (?:K|M|B)$/, null],
+/* ---------- Russian & Arabic, keyed by the English text ---------- */
+const RU_AR = {
+ "Home":["Главная","الرئيسية"],"Money":["Деньги","الأموال"],"Tasks":["Задачи","المهام"],"Budget":["Бюджет","الميزانية"],"Add":["Добавить","إضافة"],"Sections":["Разделы","الأقسام"],
+ "Saved on this phone":["Сохранено на этом телефоне","محفوظ على هذا الهاتف"],"Offline · saved on this phone":["Офлайн · сохранено на телефоне","دون اتصال · محفوظ على الهاتف"],"Loading…":["Загрузка…","جارٍ التحميل…"],
+ "Income":["Доход","الدخل"],"Expense":["Расход","المصروف"],"Balance":["Баланс","الرصيد"],"of monthly budget":["от бюджета месяца","من ميزانية الشهر"],
+ "Say it or type it":["Скажите или напишите","قلها أو اكتبها"],"Save":["Сохранить","حفظ"],
+ "To speak, tap the box and use the microphone on your Gboard keyboard.":["Чтобы говорить, нажмите на поле и используйте микрофон клавиатуры Gboard.","للتحدث، اضغط على المربع واستخدم ميكروفون لوحة Gboard."],
+ "Today's tasks":["Задачи на сегодня","مهام اليوم"],"All tasks":["Все задачи","كل المهام"],"No open tasks today.":["На сегодня задач нет.","لا توجد مهام اليوم."],
+ "Savings goals":["Цели накоплений","أهداف الادخار"],"Details":["Подробнее","التفاصيل"],"Recent transactions":["Последние операции","آخر العمليات"],"All":["Все","الكل"],
+ "No transactions yet.":["Операций пока нет.","لا توجد عمليات بعد."],"Backup":["Резервная копия","النسخ الاحتياطي"],"Back up now":["Создать копию","نسخ احتياطي الآن"],"Restore":["Восстановить","استعادة"],
+ "Your data lives only on this phone. Back up regularly and keep the file in Files or Telegram.":["Данные хранятся только на этом телефоне. Регулярно делайте копию и храните файл в «Файлах» или Telegram.","بياناتك محفوظة على هذا الهاتف فقط. خذ نسخة احتياطية بانتظام واحفظ الملف في «الملفات» أو تيليجرام."],
+ "Last backup:":["Последняя копия:","آخر نسخة:"],"No backup yet.":["Копий пока нет.","لا توجد نسخة بعد."],"Excel":["Excel","إكسل"],"Export to Excel":["Экспорт в Excel","تصدير إلى إكسل"],"Import from Excel":["Импорт из Excel","استيراد من إكسل"],
+ "Export your expenses to Excel, or import a spreadsheet you already have (for example from ChatGPT). Duplicates are skipped automatically.":["Выгрузите расходы в Excel или импортируйте свою таблицу (например, из ChatGPT). Дубли пропускаются автоматически.","صدّر مصروفاتك إلى إكسل أو استورد جدولاً لديك (مثلاً من ChatGPT). يتم تخطي المكرر تلقائياً."],
+ "Nothing here yet. Use the + button to add your first expense, income, task or goal, or import your Excel file from the bottom of this page.":["Пока пусто. Нажмите +, чтобы добавить расход, доход, задачу или цель, или импортируйте Excel внизу страницы.","لا شيء هنا بعد. اضغط + لإضافة مصروف أو دخل أو مهمة أو هدف، أو استورد ملف إكسل من أسفل الصفحة."],
+ "Show sample data":["Показать пример","عرض بيانات تجريبية"],"Expenses":["Расходы","المصروفات"],"All areas":["Все разделы","كل المجالات"],"Personal/Family":["Личное/Семья","شخصي/عائلي"],"Villa":["Вилла","الفيلا"],
+ "No transactions this month.":["В этом месяце операций нет.","لا عمليات في هذا الشهر."],"Filter":["Фильтр","تصفية"],"Area":["Раздел","المجال"],"Previous month":["Прошлый месяц","الشهر السابق"],"Next month":["Следующий месяц","الشهر التالي"],
+ "Today":["Сегодня","اليوم"],"Upcoming":["Предстоящие","القادمة"],"Done":["Готово","منجزة"],"Show tasks":["Показать задачи","عرض المهام"],"No completed tasks.":["Нет выполненных задач.","لا توجد مهام منجزة."],
+ "Nothing here. Use + to add a task or a bill reminder.":["Здесь пусто. Нажмите +, чтобы добавить задачу или напоминание о счёте.","لا شيء هنا. اضغط + لإضافة مهمة أو تذكير بفاتورة."],
+ "Clear completed tasks":["Удалить выполненные","حذف المهام المنجزة"],"Overdue":["Просрочено","متأخرة"],"No date":["Без даты","بلا تاريخ"],"Alarms on your iPhone":["Будильник на iPhone","تنبيهات على الآيفون"],
+ "Add dated tasks to your iPhone Calendar so it alerts you on time, even when SayPay is closed and you are offline.":["Добавьте задачи с датой в Календарь iPhone — он напомнит вовремя, даже если SayPay закрыт и нет интернета.","أضف المهام المؤرخة إلى تقويم الآيفون لينبهك في الوقت المحدد، حتى لو كان SayPay مغلقاً ودون إنترنت."],
+ "Add all upcoming tasks to Calendar":["Добавить все задачи в Календарь","إضافة كل المهام القادمة إلى التقويم"],"Undo":["Отменить","تراجع"],"Category budgets":["Бюджеты по категориям","ميزانيات الفئات"],
+ "Tap a category to set a limit":["Нажмите на категорию, чтобы задать лимит","اضغط على فئة لتحديد حد"],"No limit":["Без лимита","بلا حد"],"Near limit":["Почти лимит","قريب من الحد"],"On track":["В норме","ضمن الحد"],
+ "Set monthly limits per category to see where you overspend.":["Задайте месячные лимиты, чтобы видеть, где вы тратите слишком много.","حدد حداً شهرياً لكل فئة لترى أين تنفق أكثر من اللازم."],
+ "Last six months":["Последние шесть месяцев","آخر ستة أشهر"],"+ New goal":["+ Новая цель","+ هدف جديد"],"Reached!":["Достигнуто!","تحقق!"],"Deposit":["Пополнить","إيداع"],"Edit":["Изменить","تعديل"],"Withdraw":["Снять","سحب"],
+ "This goal is complete.":["Цель достигнута.","اكتمل هذا الهدف."],
+ "Create a goal, like \"Emergency fund\" or \"Nowruz trip\", and tap Deposit each time you save.":["Создайте цель, например «Резервный фонд» или «Поездка на Новруз», и нажимайте «Пополнить» при каждом накоплении.","أنشئ هدفاً مثل «صندوق الطوارئ» أو «رحلة النوروز» واضغط «إيداع» كلما ادخرت."],
+ "What do you want to add?":["Что добавить?","ماذا تريد أن تضيف؟"],"Shopping, bills, rent":["Покупки, счета, аренда","مشتريات، فواتير، إيجار"],"Salary, freelance":["Зарплата, фриланс","راتب، عمل حر"],
+ "Task or reminder":["Задача или напоминание","مهمة أو تذكير"],"Daily tasks, bill and loan due dates":["Дела, сроки счетов и кредитов","مهام يومية ومواعيد الفواتير والأقساط"],"Savings goal":["Цель накоплений","هدف ادخار"],
+ "Emergency fund, trip, big purchase":["Резерв, поездка, крупная покупка","طوارئ، سفر، شراء كبير"],"Edit transaction":["Изменить операцию","تعديل العملية"],"New income":["Новый доход","دخل جديد"],"New expense":["Новый расход","مصروف جديد"],
+ "Amount (Toman)":["Сумма (томан)","المبلغ (تومان)"],"Category":["Категория","الفئة"],"Description (optional)":["Описание (необязательно)","الوصف (اختياري)"],"e.g. fruit":["например, фрукты","مثلاً فاكهة"],
+ "Payee (optional)":["Получатель (необязательно)","المستفيد (اختياري)"],"Seller or recipient":["Продавец или получатель","البائع أو المستلم"],"Date":["Дата","التاريخ"],"Note:":["Заметка:","ملاحظة:"],
+ "Save changes":["Сохранить изменения","حفظ التغييرات"],"Delete":["Удалить","حذف"],"Tap again to delete":["Нажмите ещё раз для удаления","اضغط مرة أخرى للحذف"],"Enter an amount.":["Введите сумму.","أدخل المبلغ."],
+ "Choose a date.":["Выберите дату.","اختر التاريخ."],"Saved":["Сохранено","تم الحفظ"],"Edit task":["Изменить задачу","تعديل المهمة"],"New task or reminder":["Новая задача или напоминание","مهمة أو تذكير جديد"],
+ "Title":["Название","العنوان"],"e.g. pay the electricity bill":["например, оплатить электричество","مثلاً دفع فاتورة الكهرباء"],"Type":["Тип","النوع"],"Tomorrow":["Завтра","غداً"],"Next week":["Через неделю","الأسبوع القادم"],
+ "Time (optional)":["Время (необязательно)","الوقت (اختياري)"],"Amount (for bills)":["Сумма (для счетов)","المبلغ (للفواتير)"],"Optional":["Необязательно","اختياري"],"Alert":["Напоминание","التنبيه"],"Repeat":["Повтор","التكرار"],
+ "Save and add alarm to iPhone Calendar":["Сохранить и добавить в Календарь iPhone","حفظ وإضافة تنبيه إلى تقويم الآيفون"],"Write a task title.":["Напишите название задачи.","اكتب عنوان المهمة."],
+ "Choose a date for the alarm.":["Выберите дату для напоминания.","اختر تاريخاً للتنبيه."],"Added":["Добавлено","تمت الإضافة"],"On the next screen, tap \"Add All\"":["На следующем экране нажмите «Добавить все»","في الشاشة التالية اضغط «إضافة الكل»"],
+ "On time":["В момент события","في الموعد"],"15 min before":["За 15 минут","قبل 15 دقيقة"],"1 hour before":["За 1 час","قبل ساعة"],"1 day before":["За 1 день","قبل يوم"],"Never":["Нет","بلا تكرار"],"Weekly":["Еженедельно","أسبوعي"],"Monthly":["Ежемесячно","شهري"],
+ "Personal":["Личное","شخصي"],"Work":["Работа","عمل"],"Bill":["Счёт","فاتورة"],"Installment":["Платёж по кредиту","قسط"],"Shopping":["Покупки","تسوق"],"Edit goal":["Изменить цель","تعديل الهدف"],"New savings goal":["Новая цель","هدف ادخار جديد"],
+ "Goal name":["Название цели","اسم الهدف"],"e.g. Emergency fund":["например, Резервный фонд","مثلاً صندوق الطوارئ"],"Target (Toman)":["Цель (томан)","المبلغ المستهدف (تومان)"],"Saved so far":["Уже накоплено","المدخر حتى الآن"],
+ "Create goal":["Создать цель","إنشاء الهدف"],"Enter a name and a target.":["Введите название и сумму.","أدخل الاسم والمبلغ."],"Amount":["Сумма","المبلغ"],"Deposited":["Пополнено","تم الإيداع"],"Withdrawal saved":["Снятие записано","تم تسجيل السحب"],
+ "Save limit":["Сохранить лимит","حفظ الحد"],"Remove limit":["Убрать лимит","إزالة الحد"],"Limit per month (Toman)":["Лимит в месяц (томан)","الحد الشهري (تومان)"],"Enter a limit.":["Введите лимит.","أدخل الحد."],"Limit saved":["Лимит сохранён","تم حفظ الحد"],
+ "Restore from backup":["Восстановить из копии","استعادة من نسخة"],"Choose a backup file (.json). The data on this phone will be replaced by the file.":["Выберите файл копии (.json). Данные на телефоне будут заменены.","اختر ملف النسخة (.json). ستُستبدل بيانات هذا الهاتف بمحتوى الملف."],
+ "Replace data":["Заменить данные","استبدال البيانات"],"Tap again to confirm":["Нажмите ещё раз для подтверждения","اضغط مرة أخرى للتأكيد"],"This is not a SayPay backup file.":["Это не файл копии SayPay.","هذا ليس ملف نسخة SayPay."],
+ "Data restored":["Данные восстановлены","تمت استعادة البيانات"],"SayPay backup":["Копия SayPay","نسخة SayPay"],
+ "Choose an Excel (.xlsx) or .csv file. Date and amount columns are required; description, category, area, payee and notes are read too if present.":["Выберите файл Excel (.xlsx) или .csv. Нужны столбцы даты и суммы; описание, категория, раздел, получатель и заметки тоже читаются.","اختر ملف إكسل (.xlsx) أو .csv. عمودا التاريخ والمبلغ مطلوبان؛ ويُقرأ الوصف والفئة والمجال والمستفيد والملاحظات إن وُجدت."],
+ "Reading…":["Чтение…","جارٍ القراءة…"],"Import":["Импортировать","استيراد"],"All of these are already imported.":["Всё это уже импортировано.","تم استيراد كل هذه مسبقاً."],
+ "No \"date\" and \"amount\" columns were found in this file.":["В файле не найдены столбцы «дата» и «сумма».","لم يُعثر على عمودي «التاريخ» و«المبلغ» في هذا الملف."],
+ "This file could not be read. Make sure it is .xlsx or .csv.":["Не удалось прочитать файл. Нужен .xlsx или .csv.","تعذرت قراءة الملف. تأكد أنه .xlsx أو .csv."],
+ "To read Excel files, update iOS to 16.4 or later, or save the file as CSV.":["Для чтения Excel обновите iOS до 16.4 или сохраните файл как CSV.","لقراءة ملفات إكسل حدّث iOS إلى 16.4 أو احفظ الملف بصيغة CSV."],
+ "Nothing to export yet":["Пока нечего выгружать","لا يوجد ما يُصدَّر بعد"],"SayPay export":["Экспорт SayPay","تصدير SayPay"],"Type or say a sentence first":["Сначала скажите или напишите фразу","قل أو اكتب جملة أولاً"],
+ "Save selected items":["Сохранить выбранное","حفظ المحدد"],"Check the items. Expenses without an amount are skipped; you can add them separately.":["Проверьте записи. Расходы без суммы пропускаются — добавьте их отдельно.","راجع العناصر. المصروفات بلا مبلغ لن تُحفظ؛ يمكنك إضافتها لاحقاً."],
+ "No upcoming dated tasks":["Нет предстоящих задач с датой","لا توجد مهام قادمة بتاريخ"],"Sample data added":["Пример добавлен","تمت إضافة بيانات تجريبية"],"Cleared":["Очищено","تم المسح"],"Not saved; try again":["Не сохранено, попробуйте ещё раз","لم يُحفظ؛ حاول مرة أخرى"],
+ "Toman":["томан","تومان"],"K":["тыс.","ألف"],"M":["млн","مليون"],"B":["млрд","مليار"],
+ "Groceries":["Продукты","البقالة"],"Eating out":["Кафе и рестораны","المطاعم"],"Home & household":["Дом и быт","المنزل"],"Bills":["Счета","الفواتير"],"Fuel & transport":["Топливо и транспорт","الوقود والمواصلات"],
+ "Car & repairs":["Авто и ремонт","السيارة والصيانة"],"Building materials":["Стройматериалы","مواد البناء"],"Supplies & repairs":["Материалы и ремонт","لوازم وتصليحات"],"Labor":["Оплата работ","أجور العمال"],"Health & medicine":["Здоровье и лекарства","الصحة والدواء"],
+ "Family allowance":["Помощь семье","مصروف العائلة"],"Debt & loans":["Долги и кредиты","الديون والقروض"],"Clothes & shopping":["Одежда и покупки","الملابس والتسوق"],"Subscriptions":["Подписки","الاشتراكات"],"Pets":["Питомцы","الحيوانات الأليفة"],
+ "Fun & travel":["Отдых и поездки","الترفيه والسفر"],"Education":["Образование","التعليم"],"Other":["Другое","أخرى"],"Salary":["Зарплата","الراتب"],"Freelance":["Фриланс","عمل حر"],"Gift":["Подарок","هدية"],"Other income":["Другой доход","دخل آخر"],
+ "Farvardin":["Фарвардин","فروردين"],"Ordibehesht":["Ордибехешт","أرديبهشت"],"Khordad":["Хордад","خرداد"],"Tir":["Тир","تير"],"Mordad":["Мордад","مرداد"],"Shahrivar":["Шахривар","شهريور"],"Mehr":["Мехр","مهر"],"Aban":["Абан","آبان"],"Azar":["Азар","آذر"],"Dey":["Дей","دي"],"Bahman":["Бахман","بهمن"],"Esfand":["Эсфанд","إسفند"],
+ "‹":["‹","›"],"›":["›","‹"],"#":["№","#"],"Date (Jalali)":["Дата (иранский календарь)","التاريخ (الهجري الشمسي)"],"Description":["Описание","الوصف"],"Payee":["Получатель","المستفيد"],"Payment method":["Способ оплаты","طريقة الدفع"],"Notes":["Заметки","ملاحظات"],
+ "Ledger":["Журнал","السجل"],"Summary":["Итоги","الملخص"],"Month":["Месяц","الشهر"],"Total expense":["Всего расходов","إجمالي المصروف"],"Villa expense":["Расходы на виллу","مصروف الفيلا"],"Total":["Итого","المجموع"],"Status":["Статус","الحالة"],"Open":["Открыта","مفتوحة"],"from SayPay":["из SayPay","من SayPay"],
+ "Tap to speak":["Нажмите и говорите","اضغط وتحدث"],"Listening… tap again to finish":["Слушаю… нажмите ещё раз, чтобы закончить","أستمع… اضغط مرة أخرى للإنهاء"],"or type here":["или напишите здесь","أو اكتب هنا"],
+ "Language":["Язык","اللغة"],"Nothing heard. Try again.":["Ничего не слышно. Попробуйте ещё раз.","لم أسمع شيئاً. حاول مرة أخرى."],
+ "The keyboard is open. Switch to Gboard with the globe key and tap its microphone.":["Клавиатура открыта. Переключитесь на Gboard (кнопка с глобусом) и нажмите её микрофон.","لوحة المفاتيح مفتوحة. انتقل إلى Gboard بزر الكرة الأرضية واضغط الميكروفون فيها."],
+ "Microphone is not available here. Tap the box and use your keyboard microphone.":["Микрофон здесь недоступен. Нажмите на поле и используйте микрофон клавиатуры.","الميكروفون غير متاح هنا. اضغط على المربع واستخدم ميكروفون لوحة المفاتيح."],
+};
+const PAT = [
+  [/^(.+) مورد ثبت شد$/,'$1 items saved','Сохранено: $1','تم الحفظ: $1'],[/^(.+) مورد وارد شد$/,'$1 items imported','Импортировано: $1','تم الاستيراد: $1'],
+  [/^(.+) مورد پیدا شد$/,'$1 items found','Найдено: $1','تم العثور على: $1'],[/^(.+) مورد در فایل پیدا شد\.$/,'$1 items found in the file.','Найдено в файле: $1.','في الملف: $1.'],
+  [/^(.+) هزینه آماده ورود$/,'$1 expenses ready to import','Готово к импорту: $1','جاهز للاستيراد: $1'],[/^وارد کردن (.+) مورد$/,'Import $1 items','Импортировать ($1)','استيراد ($1)'],
+  [/^(.+) مورد ویلا$/,'$1 villa items','вилла: $1','الفيلا: $1'],[/^(.+) مورد تکراری کنار گذاشته شد$/,'$1 duplicates skipped','пропущено дублей: $1','تم تخطي المكرر: $1'],
+  [/^(.+) یادآور برای تقویم آماده شد$/,'$1 reminders ready for Calendar','Напоминаний для Календаря: $1','تذكيرات للتقويم: $1'],
+  [/^(.+) قبض یا قسط در ۷ روز آینده سررسید دارد\.$/,'$1 bills or installments are due in the next 7 days.','Счетов и платежей в ближайшие 7 дней: $1.','فواتير وأقساط مستحقة خلال 7 أيام: $1.'],
+  [/^مبلغ را (.+) در نظر گرفتم؛ اگر درست نیست اصلاحش کنید\.$/,'I read the amount as $1. Correct it if that is wrong.','Я понял сумму как $1. Исправьте, если неверно.','فهمت المبلغ $1. صحّحه إذا كان خطأ.'],
+  [/^از (.+) تا (.+)$/,'From $1 to $2','С $1 по $2','من $1 إلى $2'],[/^جمع (.+)$/,'Total $1','Итого $1','المجموع $1'],[/^خرج (.+): (.+)$/,'Spent in $1: $2','Расход за $1: $2','المصروف في $1: $2'],
+  [/^خرج (.+)$/,'Spent $1','Расход $1','مصروف $1'],[/^مانده: (.+)$/,'Left: $1','Осталось: $1','المتبقي: $1'],[/^مانده (.+)$/,'Balance · $1','Баланс · $1','الرصيد · $1'],
+  [/^ساعت (.+)$/,'at $1','в $1','الساعة $1'],[/^نوبت بعدی: (.+)$/,'Next: $1','Следующий: $1','التالي: $1'],[/^بیشینه: (.+)$/,'Max: $1','Макс.: $1','الأعلى: $1'],
+  [/^(.+) از (.+) تومان$/,'$1 of $2 Toman','$1 из $2 томанов','$1 من $2 تومان'],[/^موجودی فعلی: (.+) از (.+)$/,'Current: $1 of $2','Сейчас: $1 из $2','الحالي: $1 من $2'],
+  [/^(.+)٪ بیش از سقف$/,'$1% over limit','на $1% больше лимита','أعلى من الحد بـ $1%'],[/^سقف ماهانه «(.+)»$/,'Monthly limit: $1','Месячный лимит: $1','الحد الشهري: $1'],
+  [/^واریز به «(.+)»$/,'Deposit to "$1"','Пополнить «$1»','إيداع في «$1»'],
 ];
+const DICT = LANG==='fa' ? {} : LANG==='en' ? DICT_EN :
+  Object.fromEntries(Object.entries(DICT_EN).map(([k,v])=>[k, (RU_AR[v]||[])[LANG==='ru'?0:1] ?? v]));
+const PATTERNS = PAT.map(p=>[p[0], p[{fa:1,en:1,ru:2,ar:3}[LANG]]]);
 const KEYS = Object.keys(DICT).filter(k=>k.length>1).sort((a,b)=>b.length-a.length);
 const KEYRES = KEYS.map(k=>[new RegExp('(^|[^\\u0600-\\u06FF\\u200c])'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?=$|[^\\u0600-\\u06FF\\u200c])','g'), DICT[k]]);
 const hasFa = s => /[؀-ۿ]/.test(s);
@@ -372,33 +474,40 @@ function trCore(t){
 function tr(s){
   if(!EN() || s==null) return s; s=String(s); if(!hasFa(s) && !/[›‹٪]/.test(s)) return s;
   const lead=s.match(/^\s*/)[0], tail=s.match(/\s*$/)[0], core=s.trim(); if(!core) return s;
-  return lead + trCore(core).replace(/٪/g,'%').replace(/،/g,',').replace(/؛/g,';').replace(/[«»]/g,'"').replace(/؟/g,'?') + tail;
+  let out=trCore(core); if(LANG==='en'||LANG==='ru'){ out=out.replace(/٪/g,'%').replace(/،/g,',').replace(/؛/g,';').replace(/؟/g,'?'); if(LANG==='en') out=out.replace(/[«»]/g,'"'); }
+  return lead + out + tail;
 }
 const SKIP = new Set(['SCRIPT','STYLE','TEXTAREA','INPUT','OPTION']);
+const DONE = new WeakMap();
+const setTxt = (n,v)=>{ if(v!==n.nodeValue){ n.nodeValue=v; } DONE.set(n,n.nodeValue); };
 function trNode(root){
   if(!EN() || !root) return;
   const blocked = n => { for(let e=n.nodeType===1?n:n.parentElement; e; e=e.parentElement){ if(SKIP.has(e.tagName) || e.getAttribute('translate')==='no') return true; } return false; };
-  if(root.nodeType===3){ if(!blocked(root)){ const v=tr(root.nodeValue); if(v!==root.nodeValue) root.nodeValue=v; } return; }
+  if(root.nodeType===3){ if(DONE.get(root)!==root.nodeValue && !blocked(root)) setTxt(root,tr(root.nodeValue)); return; }
   if(root.nodeType!==1 || blocked(root)) return;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); const list=[]; while(w.nextNode()) list.push(w.currentNode);
-  list.forEach(n=>{ if(!blocked(n)){ const v=tr(n.nodeValue); if(v!==n.nodeValue) n.nodeValue=v; } });
+  list.forEach(n=>{ if(DONE.get(n)!==n.nodeValue && !blocked(n)) setTxt(n,tr(n.nodeValue)); });
   [root,...root.querySelectorAll('[placeholder],[aria-label],[title]')].forEach(el=>{ if(!el.getAttribute || blocked(el.parentElement||el) && el!==root) return;
     ['placeholder','aria-label','title'].forEach(a=>{ const v=el.getAttribute(a); if(v && hasFa(v)) el.setAttribute(a,tr(v)); }); });
 }
 const mo = new MutationObserver(ms=>{ if(!EN()) return; mo.disconnect(); ms.forEach(m=>{ if(m.type==='characterData') trNode(m.target); else m.addedNodes.forEach(trNode); }); observe(); });
 function observe(){ mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
 function applyLang(){
-  const dir=EN()?'ltr':'rtl', lang=EN()?'en':'fa';
+  const dir=RTL()?'rtl':'ltr', lang=LANG;
   document.documentElement.setAttribute('dir',dir); document.documentElement.setAttribute('lang',lang);
   document.querySelectorAll('#app,.nav,.sheet').forEach(e=>{ e.setAttribute('dir',dir); e.setAttribute('lang',lang); });
-  const b=document.getElementById('langbtn'); if(b){ b.textContent=EN()?'فا':'EN'; b.setAttribute('aria-label',EN()?'فارسی':'English'); b.setAttribute('translate','no'); }
+  const b=document.getElementById('langbtn'); if(b){ b.innerHTML=GLOBE+`<span>${LANG_NAMES[LANG]}</span>`; b.setAttribute('translate','no'); }
+}
+const GLOBE='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>';
+function sheetLang(){
+  openSheet(`<h3>زبان</h3><div class="langs" translate="no">${Object.entries(LANG_NAMES).map(([k,n])=>`<button class="langopt" data-act="lang-set" data-k="${k}" aria-pressed="${k===LANG}" dir="${k==='fa'||k==='ar'?'rtl':'ltr'}"><b>${n}</b><span>${{fa:'Persian',en:'English',ru:'Russian',ar:'Arabic'}[k]}</span></button>`).join('')}</div>`);
 }
 function setLang(l){ LANG=l; try{ localStorage.setItem('saypay.lang',l); }catch(e){} location.reload(); }
 
 /* ---------- format helpers ---------- */
 const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-const fa = n => Number(n||0).toLocaleString(EN()?'en-US':'fa-IR');
-const faY = n => Number(n).toLocaleString(EN()?'en-US':'fa-IR',{useGrouping:false});
+const fa = n => Number(n||0).toLocaleString(LOC[LANG]);
+const faY = n => Number(n).toLocaleString(LOC[LANG],{useGrouping:false});
 const signed = n => n<0 ? '\u2066−'+fa(Math.abs(n))+'\u2069' : fa(n);
 const money = n => signed(Math.round(n)) + ' تومان';
 const short = n => { n=Math.round(n); const a=Math.abs(n);
@@ -420,7 +529,8 @@ const isoMK = iso => { const j=jp(iso); return mkey(j.y,j.m); };
 const mLabel = (y,m) => `${MONTHS[m-1]} ${faY(y)}`;
 const wd = new Intl.DateTimeFormat('fa-IR',{weekday:'long'});
 function dayLabel(iso){ const t=todayISO();
-  if(EN()){ if(iso===t) return 'Today'; if(iso===addDays(t,-1)) return 'Yesterday'; if(iso===addDays(t,1)) return 'Tomorrow'; return new Date(iso+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}); }
+  if(EN()){ const R={en:['Today','Yesterday','Tomorrow'],ru:['Сегодня','Вчера','Завтра'],ar:['اليوم','أمس','غداً']}[LANG];
+    if(iso===t) return R[0]; if(iso===addDays(t,-1)) return R[1]; if(iso===addDays(t,1)) return R[2]; return new Date(iso+'T12:00:00').toLocaleDateString(LOC[LANG],{weekday:'short',month:'short',day:'numeric'}); }
   if(iso===t) return 'امروز'; if(iso===addDays(t,-1)) return 'دیروز'; if(iso===addDays(t,1)) return 'فردا';
   const j=jp(iso); return `${wd.format(new Date(iso+'T12:00:00'))} ${fa(j.d)} ${MONTHS[j.m-1]}`; }
 const shiftM = (y,m,d) => { let t=y*12+(m-1)+d; return {y:Math.floor(t/12), m:t%12+1}; };
@@ -520,7 +630,8 @@ function vHome(){
   const goals=all('goal');
   const nothing = !Object.keys(items).length;
   return `
-  <section class="ledger">
+  ${quickBox()}
+  <section class="ledger" style="margin-top:14px">
     <div><div class="lbl">مانده ${MONTHS[T.m-1]}</div><div class="big num">${money(s.i-s.o)}</div></div>
     <div class="row">
       <div class="mini"><span class="lbl">درآمد</span><b class="num">${short(s.i)}</b></div>
@@ -529,7 +640,6 @@ function vHome(){
     ${totalLimit?`<div><div class="lbl" style="display:flex;justify-content:space-between"><span>از بودجه ماه</span><span class="num">${fa(Math.round(s.o/totalLimit*100))}٪</span></div>
       <div class="meter ${s.o>totalLimit?'over':''}" style="margin-top:6px"><span style="width:${pct}%"></span></div></div>`:''}
   </section>
-  ${quickBox()}
   ${nothing? `<div class="sec">${emptyBox('هنوز چیزی ثبت نکرده‌اید. با دکمه زرد پایین صفحه اولین هزینه، درآمد، کار یا هدف را اضافه کنید، یا فایل اکسل قبلی‌تان را از پایین صفحه وارد کنید.', true)}</div>`:''}
   <section class="sec">
     <div class="sec-h"><h2>کارهای امروز</h2><button class="link" data-tab="tasks">همه کارها</button></div>
@@ -640,7 +750,7 @@ function vPlan(){
 
 function render(){
   document.getElementById('today').innerHTML = EN()
-    ? `${new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}<br><b class="num">${T.d} ${DICT[MONTHS[T.m-1]]} ${T.y}</b>`
+    ? `${new Date().toLocaleDateString(LOC[LANG],{weekday:'long',month:'short',day:'numeric'})}<br><b class="num">${fa(T.d)} ${DICT[MONTHS[T.m-1]]} ${faY(T.y)}</b>`
     : `${wd.format(new Date())}<br><b class="num">${fa(T.d)} ${MONTHS[T.m-1]} ${faY(T.y)}</b>`;
   const v = {home:vHome, tx:vTx, tasks:vTasks, plan:vPlan}[st.tab]();
   document.getElementById('view').innerHTML = v;
@@ -650,7 +760,7 @@ function render(){
 /* ---------- sheets ---------- */
 const root=document.getElementById('sheetRoot');
 function openSheet(html, onMount){
-  root.innerHTML = `<div class="veil" data-act="close"><div class="sheet" dir="${EN()?'ltr':'rtl'}" role="dialog" aria-modal="true"><div class="grip"></div>${html}</div></div>`;
+  root.innerHTML = `<div class="veil" data-act="close"><div class="sheet" dir="${RTL()?'rtl':'ltr'}" role="dialog" aria-modal="true"><div class="grip"></div>${html}</div></div>`;
   const sh=root.querySelector('.sheet');
   onMount && onMount(sh);
 }
@@ -994,21 +1104,115 @@ function parseSentenceEn(raw){
   return {kind:'tx',type,amount,cat,note:note||raw,date:date||t,scope,guess,raw};
 }
 
-function parseAll(text){
-  return String(text||'').split(/\n|\.\s|؛|(?:\s+و\s+بعد\s+)/).map(x=>x.trim()).filter(Boolean).map(x=> /[a-z]/i.test(x) && !/[\u0600-\u06FF]/.test(x) ? parseSentenceEn(x) : parseSentence(x)).filter(Boolean);
+
+const IW = {
+  ru:{ num:{ноль:0,один:1,одна:1,два:2,две:2,три:3,четыре:4,пять:5,шесть:6,семь:7,восемь:8,девять:9,десять:10,одиннадцать:11,двенадцать:12,пятнадцать:15,двадцать:20,тридцать:30,сорок:40,пятьдесят:50,шестьдесят:60,семьдесят:70,восемьдесят:80,девяносто:90,сто:100,двести:200,триста:300,четыреста:400,пятьсот:500,шестьсот:600,семьсот:700,восемьсот:800,девятьсот:900,полтора:1.5},
+       scale:[[/^тыс/,1e3],[/^млн$|^миллион/,1e6],[/^млрд$|^миллиард/,1e9]], and:/^и$/,
+       rel:[['послезавтра',2],['позавчера',-2],['завтра',1],['вчера',-1],['сегодня',0]],
+       week:[[/понедельник/,1],[/вторник/,2],[/сред[ауы]/,3],[/четверг/,4],[/пятниц[ауы]/,5],[/суббот[ауы]/,6],[/воскресень[ея]/,0]],
+       time:/(?:^|\s)в (\d{1,2})(?::(\d{2}))?\s*(утра|дня|вечера|ночи|часов|часа|час)?/, pm:/дня|вечера/,
+       task:/напомни|нужно|надо|должен|должна|встреча|позвонить|оплатить|заплатить|купить|срок/, past:/купил|заплатил|потратил|оплатил|стоил|отдал|заправил/,
+       inc:/зарплат|доход|получил|заработал|продал/, money:/томан\S*|риал\S*/g, rial:/^риал/, villa:/вилл|дач/,
+       cats:[['food',/хлеб|продукт|молок|фрукт|овощ|мяс|кофе|чай|еда|магазин|яйц|сыр|рис/],['eatout',/ресторан|кафе|ужин|обед|завтрак|пицц|торт/],['transport',/бензин|топлив|такси|метро|автобус|парковк/],
+         ['health',/лекарств|врач|аптек|больниц|стоматолог/],['car',/машин|авто|шин|ремонт машины|автосервис/],['build',/цемент|труб|материал|желез|кирпич|стройк/],['bills',/счёт|счет|электрич|интернет|телефон|газ/],
+         ['home',/аренд|уборк|моющ/],['debt',/кредит|долг|займ/],['family',/дочер|сын|семь/],['personal',/сигарет|стрижк/],['shop',/одежд|обув/],['fun',/кино|поездк|отел|билет/],['edu',/книг|курс|учёб|учеб|школ/]],
+       tag:[['قبض',/счёт|счет|электрич|интернет/],['قسط',/кредит|займ/],['خرید',/купить|покупк/],['کار',/встреча|работ|офис/]],
+       drop:/(^|\s)(я|мне|за|на|в|напомни|напомнить|пожалуйста|утра|вечера|дня|ночи)(?=\s|$)/g },
+  ar:{ num:{صفر:0,واحد:1,اثنين:2,اثنان:2,ثلاثة:3,ثلاث:3,أربعة:4,اربعة:4,خمسة:5,خمس:5,ستة:6,سبعة:7,ثمانية:8,تسعة:9,عشرة:10,عشرين:20,عشرون:20,ثلاثين:30,أربعين:40,خمسين:50,ستين:60,سبعين:70,ثمانين:80,تسعين:90,مئة:100,مائة:100,مية:100,مئتين:200,ثلاثمئة:300,أربعمئة:400,خمسمئة:500,نصف:0.5},
+       scale:[[/^(ألف|الف|آلاف|الاف|ألاف)$/,1e3],[/^(مليون|ملايين|مليونين)$/,1e6],[/^(مليار|مليارات)$/,1e9]], and:/^و$/,
+       rel:[['بعد غد',2],['أول أمس',-2],['غداً',1],['غدا',1],['بكرة',1],['أمس',-1],['امس',-1],['البارحة',-1],['اليوم',0],['الليلة',0]],
+       week:[[/الأحد|الاحد/,0],[/الاثنين|الإثنين/,1],[/الثلاثاء/,2],[/الأربعاء|الاربعاء/,3],[/الخميس/,4],[/الجمعة/,5],[/السبت/,6]],
+       time:/الساعة (\d{1,2})(?::(\d{2}))?\s*(صباحاً|صباحا|مساءً|مساء|ظهراً|ظهرا|ليلاً|ليلا)?/, pm:/مساء|ظهر|ليل/,
+       task:/ذكرني|ذكّرني|يجب|لازم|موعد|اجتماع|اتصل|أتصل|ادفع|أدفع|اشتري|أشتري|سداد/, past:/اشتريت|دفعت|صرفت|كلف|كلّف|عبّأت|عبأت/,
+       inc:/راتب|دخل|استلمت|بعت|ربح|قبضت/, money:/تومان|ريال/g, rial:/^ريال/, villa:/فيلا|الفيلا/,
+       cats:[['food',/خبز|خضار|فاكهة|فواكه|حليب|لحم|دجاج|قهوة|شاي|طعام|بقالة|بيض|جبن|أرز|رز|سوبرماركت/],['eatout',/مطعم|مقهى|كافيه|عشاء|غداء|فطور|بيتزا|كعك/],['transport',/بنزين|وقود|تاكسي|مواصلات|مترو|حافلة|باص|موقف/],
+         ['health',/دواء|طبيب|دكتور|صيدلية|مستشفى|أسنان/],['car',/سيارة|السيارة|إطار|ميكانيكي/],['build',/اسمنت|إسمنت|حديد|أنابيب|انابيب|مواد بناء|طوب|بلاط/],['bills',/فاتورة|كهرباء|إنترنت|انترنت|هاتف|غاز/],
+         ['home',/إيجار|ايجار|تنظيف|منظفات/],['debt',/قرض|دين|قسط/],['family',/مصروف|ابنتي|ابني|العائلة/],['personal',/سجائر|سيجارة|حلاق/],['shop',/ملابس|حذاء|أحذية/],['fun',/سينما|سفر|فندق|تذكرة/],['edu',/كتاب|دورة|مدرسة|جامعة|رسوم/]],
+       tag:[['قبض',/فاتورة|كهرباء|إنترنت/],['قسط',/قرض|قسط/],['خرید',/اشتري|أشتري|شراء/],['کار',/اجتماع|عمل|موعد/]],
+       drop:/(^|\s)(بـ|ب|على|من|في|ذكرني|ذكّرني|أن|ان|صباحاً|صباحا|مساءً|مساء|ظهراً|ظهرا)(?=\s|$)/g },
+};
+function parseSentenceIntl(raw, lg){
+  const W=IW[lg]; let s=toEn(String(raw||'')).toLowerCase().replace(/[ً-ْ]/g,'').replace(/(\d)[\s  .,٬](?=\d{3}\b)/g,'$1').replace(/(\d)[,٫](\d{1,2})(?!\d)/g,'$1.$2').replace(/بـ\s*/g,'بـ ').replace(/[.!?؟،]+$/,'').trim(); if(!s) return null;
+  const isTask=W.task.test(s), past=W.past.test(s); const kind = isTask && !past ? 'task':'tx';
+  const t=todayISO(); let date=null, time='', used=[];
+  for(const [w,d] of W.rel) if(s.includes(w)){ date=addDays(t,d); used.push(w); break; }
+  if(!date) for(const [re,wd] of W.week){ const m=s.match(re); if(m){ const now=new Date(t+'T12:00:00').getDay(); let diff=(wd-now+7)%7; date = kind==='task'? addDays(t,diff) : addDays(t, diff===0?0:diff-7); used.push(m[0]); break; } }
+  const tm=s.match(W.time); if(tm){ let h=+tm[1], mi=tm[2]?+tm[2]:0; if(tm[3] && W.pm.test(tm[3]) && h<12) h+=12; if(h<24){ time=`${pad(h)}:${pad(mi)}`; used.push(tm[0]); } }
+  let rest=s; used.forEach(u=>rest=rest.replace(u,' '));
+  const tok=rest.split(/\s+/).filter(Boolean); let best=null;
+  const scaleOf=w=>{ for(const [re,v] of W.scale) if(re.test(w)) return v; return 0; };
+  const isN=w=>/^\d+(\.\d+)?$/.test(w)||(w in W.num)||scaleOf(w)>0;
+  for(let i=0;i<tok.length;i++){
+    if(!isN(tok[i])) continue; let total=0,cur=0,hasScale=false,j=i;
+    while(j<tok.length){ const w=tok[j];
+      if(/^\d+(\.\d+)?$/.test(w)){ cur+=parseFloat(w); j++; }
+      else if(w in W.num){ cur+=W.num[w]; j++; }
+      else if(scaleOf(w)){ total+=(cur||1)*scaleOf(w); cur=0; hasScale=true; j++; }
+      else if(W.and.test(w) && tok[j+1] && isN(tok[j+1])){ j++; }
+      else break; }
+    total+=cur; if(total>0 && (!best||total>best.v)) best={i,j,v:total,hasScale}; i=j;
+  }
+  let amount=0, guess=false;
+  if(best){ amount=best.v; const after=tok[best.j]||''; if(W.rial.test(after)) amount/=10; else if(!best.hasScale && amount<1000){ amount*=1000; guess=true; } amount=Math.round(amount); }
+  let words=tok.slice(); if(best) words.splice(best.i,best.j-best.i);
+  let note=words.join(' ').replace(W.money,' ').replace(W.drop,' ').replace(/\s+/g,' ').trim();
+  if(lg==='ru') note=note.charAt(0).toUpperCase()+note.slice(1);
+  const scope=W.villa.test(s)?'villa':'personal';
+  if(kind==='task'){ let tag='شخصی'; for(const [k,re] of W.tag) if(re.test(s)){ tag=k; break; }
+    return {kind:'task',title:note||raw,due:date||(time?t:''),time,tag,amount,guess,remind:15,repeat:'none',raw}; }
+  const type=W.inc.test(s)?'in':'out'; let cat='other';
+  if(type==='in') cat=/зарплат|راتب/.test(s)?'salary':'other_in'; else for(const [k,re] of W.cats) if(re.test(s)){ cat=k; break; }
+  return {kind:'tx',type,amount,cat,note:note||raw,date:date||t,scope,guess,raw};
 }
-window.__sp = {parseAll, parseSentence, categorize, j2g, parseSentenceEn:(...a)=>parseSentenceEn(...a), tr:(...a)=>tr(...a)};
+
+function parseAll(text){
+  return String(text||'').split(/\n|\.\s|؛|(?:\s+و\s+بعد\s+)|(?:\s+а\s+потом\s+)|(?:\s+ثم\s+)|(?:,?\s+and\s+then\s+)/i).map(x=>x.trim()).filter(Boolean).map(x=> /[\u0400-\u04FF]/.test(x) ? parseSentenceIntl(x,'ru') : /[\u0600-\u06FF]/.test(x) ? (LANG==='ar' || /[ةأإىؤ]|ي(?![\u0600-\u06FF])|ك/.test(x) && !/[پچژگکی]/.test(x) ? parseSentenceIntl(x,'ar') : parseSentence(x)) : /[a-z]/i.test(x) ? parseSentenceEn(x) : parseSentence(x)).filter(Boolean);
+}
+window.__sp = {parseIntl:(...a)=>parseSentenceIntl(...a), parseAll, parseSentence, categorize, j2g, parseSentenceEn:(...a)=>parseSentenceEn(...a), tr:(...a)=>tr(...a)};
 
 /* ---------- quick entry UI ---------- */
+const MIC_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>';
+function qePh(){ return {fa:'مثلاً: نون بربری ۱۴۵ هزار تومن خریدم&#10;فردا ساعت ۱۰ صبح قسط وام رو بدم', en:'e.g. Bought bread for 145 thousand toman&#10;Pay the loan installment tomorrow at 10am',
+  ru:'Например: купил хлеб за 145 тысяч томанов&#10;Завтра в 10 оплатить кредит', ar:'مثلاً: اشتريت خبزاً بـ 145 ألف تومان&#10;غداً الساعة 10 ادفع قسط القرض'}[LANG]; }
 function quickBox(){
-  return `<section class="sec qe-sec">
-    <div class="qe">
-      <label for="qe" class="qe-lab"><span class="mic" aria-hidden="true"></span>بگو یا بنویس</label>
-      <textarea id="qe" rows="2" placeholder="${EN()?'e.g. Bought bread for 145 thousand toman&#10;Pay the loan installment tomorrow at 10am':'مثلاً: نون بربری ۱۴۵ هزار تومن خریدم&#10;فردا ساعت ۱۰ صبح قسط وام رو بدم'}">${esc(st.qe||'')}</textarea>
-      <div class="qe-row"><span class="small muted">برای گفتن با صدا، روی کادر بزنید و میکروفون کیبورد Gboard را بزنید.</span><button class="btn pri" data-act="qe-go">ثبت</button></div>
-    </div></section>`;
+  const on=!!rec;
+  return `<section class="voice ${on?'on':''}" id="voice">
+    <button class="voice-top" data-act="mic" aria-label="${on?'در حال شنیدن… دوباره بزنید تا تمام شود':'برای گفتن بزنید'}">
+      <span class="micbig">${MIC_SVG}</span>
+      <span class="voice-t"><b id="vtitle">${on?'در حال شنیدن… دوباره بزنید تا تمام شود':'برای گفتن بزنید'}</b><span>یا اینجا بنویسید</span></span>
+    </button>
+    <textarea id="qe" rows="2" placeholder="${qePh()}">${esc(st.qe||'')}</textarea>
+    <div class="vrow"><span class="vhint" id="vhint">${st.vhint||''}</span><button class="btn" data-act="qe-go">ثبت</button></div>
+  </section>`;
+}
+/* ---------- speaking ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SR_LANG = {en:'en-US', ru:'ru-RU', ar:'ar-SA'};
+let rec = null;
+function setHint(t){ st.vhint=t; const h=document.getElementById('vhint'); if(h) h.textContent=t; }
+function setListening(on){ const v=document.getElementById('voice'); if(v) v.classList.toggle('on',on);
+  const t=document.getElementById('vtitle'); if(t) t.textContent = on? 'در حال شنیدن… دوباره بزنید تا تمام شود' : 'برای گفتن بزنید'; }
+function keyboardPath(focus){
+  const box=document.getElementById('qe'); if(box && focus!==false){ box.focus(); try{ box.setSelectionRange(box.value.length,box.value.length); }catch(e){} }
+  setHint(LANG==='fa' ? 'کیبورد باز شد. با دکمه کره به Gboard بروید و میکروفون آن را بزنید.' : (focus===false ? 'میکروفون اینجا در دسترس نیست. روی کادر بزنید و از میکروفون کیبورد استفاده کنید.' : 'کیبورد باز شد. با دکمه کره به Gboard بروید و میکروفون آن را بزنید.'));
+}
+function micTap(){
+  if(rec){ try{ rec.stop(); }catch(e){} return; }
+  if(LANG==='fa' || !SR){ keyboardPath(); return; }
+  let r; try{ r=new SR(); }catch(e){ keyboardPath(); return; }
+  rec=r; r.lang=SR_LANG[LANG]; r.interimResults=true; r.continuous=false; r.maxAlternatives=1;
+  const base = st.qe ? st.qe.replace(/\s+$/,'')+'\n' : ''; let finalText='', failed='';
+  r.onresult = e => { let interim=''; finalText=''; for(const x of e.results){ if(x.isFinal) finalText+=x[0].transcript; else interim+=x[0].transcript; }
+    st.qe = base + (finalText||interim); const box=document.getElementById('qe'); if(box) box.value=st.qe; };
+  r.onerror = e => { failed = e.error||'error'; };
+  r.onend = () => { rec=null; setListening(false);
+    if(finalText.trim()){ setHint(''); runQuick(); }
+    else if(failed==='no-speech' || (!failed)) setHint('چیزی شنیده نشد. دوباره امتحان کنید.');
+    else if(failed!=='aborted') keyboardPath(false); };
+  try{ r.start(); setHint(''); setListening(true); }catch(e){ rec=null; keyboardPath(); }
 }
 function runQuick(){
+  setHint('');
   const list=parseAll(st.qe);
   if(!list.length){ toast('اول یک جمله بنویسید یا بگویید'); return; }
   if(list.length===1){ const p=list[0]; st.qe='';
@@ -1091,7 +1295,7 @@ async function exportExcel(){
   Object.keys(months).sort().forEach(k=>{ const o=months[k]; sum.push([EN()? `${DICT[MONTHS[o.m-1]]} ${o.y}` : mLabel(o.y,o.m), o.i, o.o, o.v, o.i-o.o]); });
   const bycat={}; tx.filter(t=>t.type==='out').forEach(t=>{ const n=tr(catOf(t.cat).n); bycat[n]=(bycat[n]||0)+t.amount; });
   sum.push([]); sum.push(['دسته','جمع هزینه'].map(tr)); Object.entries(bycat).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>sum.push([n,v]));
-  const tasks=[['عنوان','نوع','تاریخ','ساعت','مبلغ (تومان)','تکرار','وضعیت'].map(x=>x==='ساعت'&&EN()?'Time':tr(x))];
+  const tasks=[['عنوان','نوع','تاریخ','ساعت','مبلغ (تومان)','تکرار','وضعیت'].map(x=>x==='ساعت'&&EN()?{en:'Time',ru:'Время',ar:'الوقت'}[LANG]:tr(x))];
   all('task').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).forEach(t=>tasks.push([t.title,tr(t.tag||''),jDate(t.due),t.time||'',t.amount||'',tr(REPEAT_N[t.repeat||'none']),tr(t.done?'انجام شد':'باز')]));
   const blob=xlsxBlob([
     {name:tr('دفتر مالی'),rows,widths:[6,12,8,15,22,44,20,15,14,40]},
@@ -1279,7 +1483,9 @@ document.addEventListener('click',e=>{
     case 'import': sheetImport(); break;
     case 'calall': calendarAll(); break;
     case 'scope': st.scope=a.dataset.k; render(); break;
-    case 'lang': setLang(EN()?'fa':'en'); break;
+    case 'lang': sheetLang(); break;
+    case 'lang-set': if(a.dataset.k!==LANG) setLang(a.dataset.k); else closeSheet(); break;
+    case 'mic': micTap(); break;
     case 'filter': st.filter=a.dataset.k; render(); break;
     case 'tseg': st.tseg=a.dataset.k; render(); break;
     case 'vm': { const p=shiftM(st.vy,st.vm,+a.dataset.d); st.vy=p.y; st.vm=p.m; render(); break; }
