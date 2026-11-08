@@ -59,7 +59,9 @@ button{cursor:pointer}
 .brand{font-family:"Vazirmatn",Helvetica,Arial,sans-serif;font-weight:800;font-size:26px;line-height:1;color:var(--brand);direction:ltr;display:inline-flex;align-items:center;gap:8px}
 .brand em{font-style:normal;color:var(--gold)}
 .brand svg{width:26px;height:26px;border-radius:7px}
-.today{font-size:13px;color:var(--muted);text-align:left}
+.today{font-size:12.5px;color:var(--muted);text-align:end;white-space:nowrap;line-height:1.5}
+.hd-end{display:flex;align-items:center;gap:10px}
+.langbtn{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;font-weight:800;font-size:13px;padding:6px 10px;color:var(--brand);min-width:44px}
 .store{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:2px}
 .store i{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block}
 .store.ok i{background:var(--pos)}
@@ -87,7 +89,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 
 /* lists */
 .list{background:var(--surface);border-radius:var(--r);overflow:hidden}
-.item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line);width:100%;background:none;border-inline:0;border-top:0;text-align:right}
+.item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line);width:100%;background:none;border-inline:0;border-top:0;text-align:start}
 .item:last-child{border-bottom:0}
 .dot{width:36px;height:36px;border-radius:11px;flex:none;display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff}
 .item .main{flex:1;min-width:0}
@@ -111,7 +113,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 .stat .k{font-size:12px;color:var(--muted)} .stat .v{font-weight:800;font-size:15px;overflow-wrap:anywhere}
 
 /* budget rows */
-.brow{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:none;border-inline:0;border-top:0;width:100%;text-align:right}
+.brow{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:none;border-inline:0;border-top:0;width:100%;text-align:start}
 .brow:last-child{border-bottom:0}
 .brow .h{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .brow .h span:first-child{font-weight:700;display:flex;align-items:center;gap:8px}
@@ -135,11 +137,11 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 /* tasks */
 .task{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line);position:relative}
 .task:last-child{border-bottom:0}
-.task.late::before{content:"";position:absolute;inset-block:10px;right:0;width:3px;border-radius:3px;background:var(--neg)}
+.task.late::before{content:"";position:absolute;inset-block:10px;inset-inline-start:0;width:3px;border-radius:3px;background:var(--neg)}
 .chk{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);background:none;flex:none;display:grid;place-items:center;padding:0}
 .chk.on{background:var(--brand);border-color:var(--brand)}
 .chk.on::after{content:"";width:10px;height:6px;border:2.5px solid var(--surface);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
-.task .main{flex:1;min-width:0;background:none;border:0;text-align:right;padding:0}
+.task .main{flex:1;min-width:0;background:none;border:0;text-align:start;padding:0}
 .task.done .t{text-decoration:line-through;color:var(--muted)}
 
 /* goals */
@@ -184,7 +186,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 .chip[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand);font-weight:700}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .choose{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.choose button{background:var(--surface);border:0;border-radius:16px;padding:16px 14px;text-align:right;display:flex;flex-direction:column;gap:4px}
+.choose button{background:var(--surface);border:0;border-radius:16px;padding:16px 14px;text-align:start;display:flex;flex-direction:column;gap:4px}
 .choose b{font-size:15px}
 .choose span{font-size:12.5px;color:var(--muted)}
 .choose i{width:28px;height:4px;border-radius:4px;display:block;margin-bottom:6px}
@@ -221,7 +223,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
       <div class="brand"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#14213d"/><g stroke="#e3c58d" stroke-width="9" stroke-linecap="round"><path d="M22 42v16"/><path d="M36 30v40"/><path d="M50 18v64"/><path d="M64 30v40"/><path d="M78 42v16"/></g></svg><span>Say<em>Pay</em></span></div>
       <div class="store" id="store"><i></i><span>در حال آماده‌سازی…</span></div>
     </div>
-    <div class="today" id="today"></div>
+    <div class="hd-end"><button class="langbtn" id="langbtn" data-act="lang" translate="no">EN</button><div class="today" id="today"></div></div>
   </header>
   <main id="view"></main>
 </div>
@@ -256,10 +258,147 @@ const TAGS = ['شخصی','کار','قبض','قسط','خرید'];
 const catOf = k => (k==='loan'&&(k='debt'), OUT.find(c=>c.k===k) || IN.find(c=>c.k===k) || {k:'other',n:'سایر',c:8});
 const col = c => `var(--c${c})`;
 
+/* ---------- language: Persian / English ---------- */
+let LANG = (()=>{ try{ return localStorage.getItem('saypay.lang')||'fa'; }catch(e){ return 'fa'; } })();
+const EN = () => LANG==='en';
+const DICT = {
+  // nav & headers
+  'خانه':'Home','دخل و خرج':'Money','کارها':'Tasks','بودجه و هدف':'Budget','افزودن':'Add','بخش‌ها':'Sections',
+  'ذخیره روی همین گوشی':'Saved on this phone','آفلاین · ذخیره روی همین گوشی':'Offline · saved on this phone','در حال آماده‌سازی…':'Loading…',
+  'درآمد':'Income','هزینه':'Expense','مانده':'Balance','از بودجه ماه':'of monthly budget',
+  'بگو یا بنویس':'Say it or type it','ثبت':'Save',
+  'برای گفتن با صدا، روی کادر بزنید و میکروفون کیبورد Gboard را بزنید.':'To speak, tap the box and use the microphone on your Gboard keyboard.',
+  'کارهای امروز':"Today's tasks",'همه کارها':'All tasks','کار باز امروز ندارید.':'No open tasks today.',
+  'اهداف پس‌انداز':'Savings goals','جزئیات':'Details','آخرین تراکنش‌ها':'Recent transactions','همه':'All',
+  'هنوز تراکنشی ثبت نشده.':'No transactions yet.',
+  'پشتیبان‌گیری':'Backup','گرفتن پشتیبان':'Back up now','بازگردانی':'Restore',
+  'اطلاعات فقط روی همین گوشی است. هر چند وقت یک‌بار پشتیبان بگیرید و فایلش را در Files یا تلگرام نگه دارید.':'Your data lives only on this phone. Back up regularly and keep the file in Files or Telegram.',
+  'آخرین پشتیبان:':'Last backup:','هنوز پشتیبانی نگرفته‌اید.':'No backup yet.',
+  'اکسل':'Excel','خروجی اکسل':'Export to Excel','ورود از اکسل':'Import from Excel',
+  'هزینه‌ها را به اکسل ببرید یا فایل اکسلی که قبلاً داشتید (مثلاً از ChatGPT) را وارد کنید. موارد تکراری خودکار کنار گذاشته می‌شوند.':'Export your expenses to Excel, or import a spreadsheet you already have (for example from ChatGPT). Duplicates are skipped automatically.',
+  'هنوز چیزی ثبت نکرده‌اید. با دکمه زرد پایین صفحه اولین هزینه، درآمد، کار یا هدف را اضافه کنید، یا فایل اکسل قبلی‌تان را از پایین صفحه وارد کنید.':'Nothing here yet. Use the + button to add your first expense, income, task or goal, or import your Excel file from the bottom of this page.',
+  'نمایش با داده‌های نمونه':'Show sample data',
+  // money tab
+  'هزینه‌ها':'Expenses','درآمدها':'Income','همه حوزه‌ها':'All areas','شخصی/خانوادگی':'Personal/Family','ویلا':'Villa',
+  'در این ماه تراکنشی نیست.':'No transactions this month.','فیلتر':'Filter','حوزه':'Area','ماه قبل':'Previous month','ماه بعد':'Next month',
+  // tasks tab
+  'امروز':'Today','پیش‌رو':'Upcoming','انجام‌شده':'Done','نمایش کارها':'Show tasks','کار انجام‌شده‌ای نیست.':'No completed tasks.',
+  'کاری در این بخش نیست. با دکمه + یک کار یا یادآور قبض اضافه کنید.':'Nothing here. Use + to add a task or a bill reminder.',
+  'پاک کردن کارهای انجام‌شده':'Clear completed tasks','عقب‌افتاده':'Overdue','بدون تاریخ':'No date',
+  'آلارم روی آیفون':'Alarms on your iPhone',
+  'کارهای تاریخ‌دار را به تقویم آیفون اضافه کنید تا سر وقت هشدار بدهد، حتی وقتی SayPay بسته است و اینترنت ندارید.':'Add dated tasks to your iPhone Calendar so it alerts you on time, even when SayPay is closed and you are offline.',
+  'افزودن همه کارهای پیش‌رو به تقویم':'Add all upcoming tasks to Calendar','انجام شد':'Done','برگرداندن':'Undo',
+  // plan tab
+  'بودجه دسته‌ها':'Category budgets','برای تعیین سقف، روی دسته بزنید':'Tap a category to set a limit','بدون سقف':'No limit','نزدیک سقف':'Near limit','در محدوده':'On track',
+  'برای دسته‌ها سقف ماهانه تعیین کنید تا ببینید کجا بیش از حد خرج می‌کنید.':'Set monthly limits per category to see where you overspend.',
+  'شش ماه اخیر':'Last six months','+ هدف جدید':'+ New goal','رسیدید!':'Reached!','واریز':'Deposit','ویرایش':'Edit','برداشت':'Withdraw',
+  'این هدف کامل شده است.':'This goal is complete.',
+  'یک هدف تعریف کنید، مثل «صندوق اضطراری» یا «سفر عید»، و هر بار که پس‌انداز کردید واریز بزنید.':'Create a goal, like "Emergency fund" or "Nowruz trip", and tap Deposit each time you save.',
+  // add chooser
+  'چه چیزی اضافه شود؟':'What do you want to add?','خرید، قبض، اجاره':'Shopping, bills, rent','حقوق، کار آزاد':'Salary, freelance',
+  'کار یا یادآور':'Task or reminder','کار روزانه، سررسید قبض و قسط':'Daily tasks, bill and loan due dates','هدف پس‌انداز':'Savings goal',
+  'صندوق اضطراری، سفر، خرید بزرگ':'Emergency fund, trip, big purchase',
+  // tx form
+  'ویرایش تراکنش':'Edit transaction','درآمد جدید':'New income','هزینه جدید':'New expense','مبلغ (تومان)':'Amount (Toman)','دسته':'Category',
+  'توضیح (اختیاری)':'Description (optional)','مثلاً خرید میوه':'e.g. fruit','طرف حساب (اختیاری)':'Payee (optional)','فروشنده یا گیرنده':'Seller or recipient',
+  'تاریخ':'Date','یادداشت:':'Note:','ذخیره تغییرات':'Save changes','حذف':'Delete','برای حذف دوباره بزنید':'Tap again to delete',
+  'مبلغ را وارد کنید.':'Enter an amount.','تاریخ را انتخاب کنید.':'Choose a date.','ذخیره شد':'Saved','ثبت شد':'Saved',
+  // task form
+  'ویرایش کار':'Edit task','کار یا یادآور جدید':'New task or reminder','عنوان':'Title','مثلاً پرداخت قبض برق':'e.g. pay the electricity bill','نوع':'Type',
+  'فردا':'Tomorrow','هفته بعد':'Next week','ساعت (اختیاری)':'Time (optional)','مبلغ (برای قبض و قسط)':'Amount (for bills)','اختیاری':'Optional',
+  'هشدار':'Alert','تکرار':'Repeat','ذخیره و افزودن آلارم به تقویم آیفون':'Save and add alarm to iPhone Calendar',
+  'عنوان کار را بنویسید.':'Write a task title.','برای آلارم، تاریخ را انتخاب کنید.':'Choose a date for the alarm.','اضافه شد':'Added',
+  'در صفحه بعد «Add All» یا «افزودن» را بزنید':'On the next screen, tap "Add All"',
+  'سر وقت':'On time','۱۵ دقیقه قبل':'15 min before','۱ ساعت قبل':'1 hour before','۱ روز قبل':'1 day before',
+  'بدون تکرار':'Never','هفتگی':'Weekly','ماهانه':'Monthly',
+  'شخصی':'Personal','کار':'Work','قبض':'Bill','قسط':'Installment','خرید':'Shopping',
+  // goal / deposit / budget
+  'ویرایش هدف':'Edit goal','هدف پس‌انداز جدید':'New savings goal','نام هدف':'Goal name','مثلاً صندوق اضطراری':'e.g. Emergency fund',
+  'مبلغ هدف (تومان)':'Target (Toman)','تا الان پس‌انداز شده':'Saved so far','ساخت هدف':'Create goal','نام و مبلغ هدف را وارد کنید.':'Enter a name and a target.',
+  'مبلغ':'Amount','واریز شد':'Deposited','برداشت ثبت شد':'Withdrawal saved','ذخیره سقف':'Save limit','حذف سقف':'Remove limit',
+  'سقف هر ماه (تومان)':'Limit per month (Toman)','مبلغ سقف را وارد کنید.':'Enter a limit.','سقف ذخیره شد':'Limit saved',
+  // backup / import
+  'بازگردانی از پشتیبان':'Restore from backup',
+  'فایل پشتیبان (‎.json) را انتخاب کنید. اطلاعات فعلی این گوشی با محتوای فایل جایگزین می‌شود.':'Choose a backup file (.json). The data on this phone will be replaced by the file.',
+  'جایگزینی اطلاعات':'Replace data','برای تأیید دوباره بزنید':'Tap again to confirm','این فایل پشتیبان دفترچه نیست.':'This is not a SayPay backup file.',
+  'اطلاعات بازگردانی شد':'Data restored','پشتیبان دفترچه':'SayPay backup',
+  'فایل اکسل (‎.xlsx) یا ‎.csv را انتخاب کنید. ستون‌های تاریخ و مبلغ لازم است؛ شرح، دسته، حوزه، طرف حساب و یادداشت هم اگر باشند خوانده می‌شوند.':'Choose an Excel (.xlsx) or .csv file. Date and amount columns are required; description, category, area, payee and notes are read too if present.',
+  'در حال خواندن…':'Reading…','وارد کردن':'Import','همه این موارد قبلاً وارد شده‌اند.':'All of these are already imported.',
+  'ستون «تاریخ» و «مبلغ» در این فایل پیدا نشد.':'No "date" and "amount" columns were found in this file.',
+  'این فایل خوانده نشد. مطمئن شوید فایل ‎.xlsx یا ‎.csv است.':'This file could not be read. Make sure it is .xlsx or .csv.',
+  'برای خواندن اکسل، iOS را به نسخه ۱۶٫۴ یا جدیدتر به‌روز کنید، یا فایل را CSV ذخیره کنید.':'To read Excel files, update iOS to 16.4 or later, or save the file as CSV.',
+  'هنوز چیزی برای خروجی نیست':'Nothing to export yet','خروجی SayPay':'SayPay export',
+  // quick entry
+  'اول یک جمله بنویسید یا بگویید':'Type or say a sentence first','ثبت موارد انتخاب‌شده':'Save selected items',
+  'موارد را بررسی کنید. مواردی که مبلغ ندارند ثبت نمی‌شوند؛ بعداً می‌توانید آن‌ها را جدا وارد کنید.':'Check the items. Expenses without an amount are skipped; you can add them separately.',
+  'کار پیش‌رویی با تاریخ ندارید':'No upcoming dated tasks','داده‌های نمونه اضافه شد':'Sample data added','پاک شد':'Cleared',
+  'ذخیره نشد؛ دوباره امتحان کنید':'Not saved; try again',
+  // units & categories
+  'تومان':'Toman','هزار':'K','میلیون':'M','میلیارد':'B',
+  'خوراک و خواربار':'Groceries','رستوران و پذیرایی':'Eating out','خانه و خانوار':'Home & household','قبوض':'Bills','سوخت و رفت‌وآمد':'Fuel & transport',
+  'خودرو و تعمیر':'Car & repairs','مصالح و ساخت‌وساز':'Building materials','لوازم و تعمیرات':'Supplies & repairs','دستمزد':'Labor','درمان و دارو':'Health & medicine',
+  'ماهیانه و کمک خانواده':'Family allowance','بدهی، قسط و وام':'Debt & loans','روزمره شخصی':'Personal','پوشاک و خرید':'Clothes & shopping',
+  'اشتراک دیجیتال':'Subscriptions','حیوان خانگی':'Pets','تفریح و سفر':'Fun & travel','آموزش':'Education','سایر':'Other',
+  'حقوق':'Salary','کار آزاد':'Freelance','هدیه':'Gift','سایر درآمد':'Other income',
+  // months & arrows
+  'فروردین':'Farvardin','اردیبهشت':'Ordibehesht','خرداد':'Khordad','تیر':'Tir','مرداد':'Mordad','شهریور':'Shahrivar','مهر':'Mehr','آبان':'Aban','آذر':'Azar','دی':'Dey','بهمن':'Bahman','اسفند':'Esfand',
+  '›':'‹','‹':'›',
+  // excel headers
+  'ردیف':'#','تاریخ شمسی':'Date (Jalali)','دسته‌بندی':'Category','شرح':'Description','طرف حساب':'Payee','روش پرداخت':'Payment method','یادداشت':'Notes',
+  'دفتر مالی':'Ledger','خلاصه':'Summary','ماه':'Month','هزینه کل':'Total expense','هزینه ویلا':'Villa expense','جمع هزینه':'Total',
+  'مبلغ (تومان) ':'Amount (Toman)','وضعیت':'Status','باز':'Open','از SayPay':'from SayPay',
+};
+const PATTERNS = [
+  [/^(.+) مورد ثبت شد$/,'$1 items saved'],[/^(.+) مورد وارد شد$/,'$1 items imported'],[/^(.+) مورد پیدا شد$/,'$1 items found'],
+  [/^(.+) مورد در فایل پیدا شد\.$/,'$1 items found in the file.'],[/^(.+) هزینه آماده ورود$/,'$1 expenses ready to import'],[/^وارد کردن (.+) مورد$/,'Import $1 items'],
+  [/^(.+) مورد ویلا$/,'$1 villa items'],[/^(.+) مورد تکراری کنار گذاشته شد$/,'$1 duplicates skipped'],[/^(.+) یادآور برای تقویم آماده شد$/,'$1 reminders ready for Calendar'],
+  [/^(.+) قبض یا قسط در ۷ روز آینده سررسید دارد\.$/,'$1 bills or installments are due in the next 7 days.'],
+  [/^مبلغ را (.+) در نظر گرفتم؛ اگر درست نیست اصلاحش کنید\.$/,'I read the amount as $1. Correct it if that is wrong.'],
+  [/^از (.+) تا (.+)$/,'From $1 to $2'],[/^جمع (.+)$/,'Total $1'],[/^خرج (.+): (.+)$/,'Spent in $1: $2'],[/^خرج (.+)$/,'Spent $1'],
+  [/^مانده: (.+)$/,'Left: $1'],[/^مانده (.+)$/,'Balance · $1'],[/^ساعت (.+)$/,'at $1'],[/^نوبت بعدی: (.+)$/,'Next: $1'],[/^بیشینه: (.+)$/,'Max: $1'],
+  [/^(.+) از (.+) تومان$/,'$1 of $2 Toman'],[/^موجودی فعلی: (.+) از (.+)$/,'Current: $1 of $2'],[/^(.+)٪ بیش از سقف$/,'$1% over limit'],
+  [/^سقف ماهانه «(.+)»$/,'Monthly limit: $1'],[/^واریز به «(.+)»$/,'Deposit to "$1"'],[/^(.+) (?:K|M|B)$/, null],
+];
+const KEYS = Object.keys(DICT).filter(k=>k.length>1).sort((a,b)=>b.length-a.length);
+const KEYRES = KEYS.map(k=>[new RegExp('(^|[^\\u0600-\\u06FF\\u200c])'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?=$|[^\\u0600-\\u06FF\\u200c])','g'), DICT[k]]);
+const hasFa = s => /[؀-ۿ]/.test(s);
+function trCore(t){
+  if(DICT[t]!==undefined) return DICT[t];
+  if(t.includes(' · ')) return t.split(' · ').map(x=>tr(x)).join(' · ');
+  for(const [re,out] of PATTERNS){ if(out && re.test(t)) return t.replace(re,(...m)=>out.replace(/\$(\d)/g,(_,i)=>tr(m[+i]))); }
+  let r=t; for(const [re,v] of KEYRES){ if(!hasFa(r)) break; r=r.replace(re,(_,p)=>p+v); }
+  return r;
+}
+function tr(s){
+  if(!EN() || s==null) return s; s=String(s); if(!hasFa(s) && !/[›‹٪]/.test(s)) return s;
+  const lead=s.match(/^\s*/)[0], tail=s.match(/\s*$/)[0], core=s.trim(); if(!core) return s;
+  return lead + trCore(core).replace(/٪/g,'%').replace(/،/g,',').replace(/؛/g,';').replace(/[«»]/g,'"').replace(/؟/g,'?') + tail;
+}
+const SKIP = new Set(['SCRIPT','STYLE','TEXTAREA','INPUT','OPTION']);
+function trNode(root){
+  if(!EN() || !root) return;
+  const blocked = n => { for(let e=n.nodeType===1?n:n.parentElement; e; e=e.parentElement){ if(SKIP.has(e.tagName) || e.getAttribute('translate')==='no') return true; } return false; };
+  if(root.nodeType===3){ if(!blocked(root)){ const v=tr(root.nodeValue); if(v!==root.nodeValue) root.nodeValue=v; } return; }
+  if(root.nodeType!==1 || blocked(root)) return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); const list=[]; while(w.nextNode()) list.push(w.currentNode);
+  list.forEach(n=>{ if(!blocked(n)){ const v=tr(n.nodeValue); if(v!==n.nodeValue) n.nodeValue=v; } });
+  [root,...root.querySelectorAll('[placeholder],[aria-label],[title]')].forEach(el=>{ if(!el.getAttribute || blocked(el.parentElement||el) && el!==root) return;
+    ['placeholder','aria-label','title'].forEach(a=>{ const v=el.getAttribute(a); if(v && hasFa(v)) el.setAttribute(a,tr(v)); }); });
+}
+const mo = new MutationObserver(ms=>{ if(!EN()) return; mo.disconnect(); ms.forEach(m=>{ if(m.type==='characterData') trNode(m.target); else m.addedNodes.forEach(trNode); }); observe(); });
+function observe(){ mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
+function applyLang(){
+  const dir=EN()?'ltr':'rtl', lang=EN()?'en':'fa';
+  document.documentElement.setAttribute('dir',dir); document.documentElement.setAttribute('lang',lang);
+  document.querySelectorAll('#app,.nav,.sheet').forEach(e=>{ e.setAttribute('dir',dir); e.setAttribute('lang',lang); });
+  const b=document.getElementById('langbtn'); if(b){ b.textContent=EN()?'فا':'EN'; b.setAttribute('aria-label',EN()?'فارسی':'English'); b.setAttribute('translate','no'); }
+}
+function setLang(l){ LANG=l; try{ localStorage.setItem('saypay.lang',l); }catch(e){} location.reload(); }
+
 /* ---------- format helpers ---------- */
 const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-const fa = n => Number(n||0).toLocaleString('fa-IR');
-const faY = n => Number(n).toLocaleString('fa-IR',{useGrouping:false});
+const fa = n => Number(n||0).toLocaleString(EN()?'en-US':'fa-IR');
+const faY = n => Number(n).toLocaleString(EN()?'en-US':'fa-IR',{useGrouping:false});
 const signed = n => n<0 ? '\u2066−'+fa(Math.abs(n))+'\u2069' : fa(n);
 const money = n => signed(Math.round(n)) + ' تومان';
 const short = n => { n=Math.round(n); const a=Math.abs(n);
@@ -280,7 +419,9 @@ const mkey = (y,m) => y*100+m;
 const isoMK = iso => { const j=jp(iso); return mkey(j.y,j.m); };
 const mLabel = (y,m) => `${MONTHS[m-1]} ${faY(y)}`;
 const wd = new Intl.DateTimeFormat('fa-IR',{weekday:'long'});
-function dayLabel(iso){ const t=todayISO(); if(iso===t) return 'امروز'; if(iso===addDays(t,-1)) return 'دیروز'; if(iso===addDays(t,1)) return 'فردا';
+function dayLabel(iso){ const t=todayISO();
+  if(EN()){ if(iso===t) return 'Today'; if(iso===addDays(t,-1)) return 'Yesterday'; if(iso===addDays(t,1)) return 'Tomorrow'; return new Date(iso+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}); }
+  if(iso===t) return 'امروز'; if(iso===addDays(t,-1)) return 'دیروز'; if(iso===addDays(t,1)) return 'فردا';
   const j=jp(iso); return `${wd.format(new Date(iso+'T12:00:00'))} ${fa(j.d)} ${MONTHS[j.m-1]}`; }
 const shiftM = (y,m,d) => { let t=y*12+(m-1)+d; return {y:Math.floor(t/12), m:t%12+1}; };
 
@@ -350,8 +491,8 @@ const st = { scope:'all', qe:'', tab:'home', vy:T.y, vm:T.m, filter:'all', tseg:
 function txRow(t){
   const c=catOf(t.cat); const sign=t.type==='in'?'+':'−';
   return `<button class="item" data-act="edit-tx" data-id="${t.id}">
-    <span class="dot" style="background:${col(c.c)}">${esc(c.n.slice(0,1))}</span>
-    <span class="main"><span class="t" style="display:block">${esc(t.note||c.n)}</span><span class="s">${esc(c.n)}${t.scope==='villa'?'<span class="vtag">ویلا</span>':''} · ${dayLabel(t.date)}</span></span>
+    <span class="dot" style="background:${col(c.c)}">${esc(tr(c.n).slice(0,1))}</span>
+    <span class="main"><span class="t" style="display:block" translate="${t.note?'no':'yes'}">${esc(t.note||c.n)}</span><span class="s">${esc(c.n)}${t.scope==='villa'?'<span class="vtag">ویلا</span>':''} · ${dayLabel(t.date)}</span></span>
     <span class="amt num ${t.type}">${sign}${fa(t.amount)}</span></button>`;
 }
 function taskRow(t){
@@ -359,11 +500,11 @@ function taskRow(t){
   const when = t.due ? dayLabel(t.due) + (t.time? ' · ساعت '+fa(t.time.split(':')[0])+':'+toFa(t.time.split(':')[1]):'') : 'بدون تاریخ';
   return `<div class="task ${t.done?'done':''} ${late?'late':''}">
     <button class="chk ${t.done?'on':''}" data-act="toggle" data-id="${t.id}" aria-label="${t.done?'برگرداندن':'انجام شد'}"></button>
-    <button class="main" data-act="edit-task" data-id="${t.id}"><span class="t" style="display:block">${esc(t.title)}</span>
+    <button class="main" data-act="edit-task" data-id="${t.id}"><span class="t" style="display:block" translate="no">${esc(t.title)}</span>
       <span class="s">${late?'<span style="color:var(--neg);font-weight:700">عقب‌افتاده · </span>':''}${when}${t.amount?' · '+money(t.amount):''}</span></button>
     ${t.repeat&&t.repeat!=='none'?`<span class="tag">${REPEAT_N[t.repeat]}</span>`:''}${t.tag?`<span class="tag">${esc(t.tag)}</span>`:''}</div>`;
 }
-const toFa = s => String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const toFa = s => EN()? String(s) : String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 
 function emptyBox(text, sample){
   return `<div class="empty"><span>${text}</span>${sample?`<button class="btn" data-act="sample">نمایش با داده‌های نمونه</button>`:''}</div>`;
@@ -396,7 +537,7 @@ function vHome(){
     ${upcomingBills.length? `<div class="small muted">${fa(upcomingBills.length)} قبض یا قسط در ۷ روز آینده سررسید دارد.</div>`:''}
   </section>
   ${goals.length?`<section class="sec"><div class="sec-h"><h2>اهداف پس‌انداز</h2><button class="link" data-tab="plan">جزئیات</button></div>
-    <div class="list">${goals.map(g=>{const p=Math.min(100,g.saved/g.target*100||0);return `<button class="brow" data-act="deposit" data-id="${g.id}"><div class="h"><span>${esc(g.name)}</span><span class="small muted num">${fa(Math.round(p))}٪</span></div><div class="meter"><span style="width:${p}%;background:var(--brand)"></span></div></button>`}).join('')}</div></section>`:''}
+    <div class="list">${goals.map(g=>{const p=Math.min(100,g.saved/g.target*100||0);return `<button class="brow" data-act="deposit" data-id="${g.id}"><div class="h"><span translate="no">${esc(g.name)}</span><span class="small muted num">${fa(Math.round(p))}٪</span></div><div class="meter"><span style="width:${p}%;background:var(--brand)"></span></div></button>`}).join('')}</div></section>`:''}
   <section class="sec">
     <div class="sec-h"><h2>آخرین تراکنش‌ها</h2><button class="link" data-tab="tx">همه</button></div>
     ${recent.length? `<div class="list">${recent.map(txRow).join('')}</div>` : emptyBox('هنوز تراکنشی ثبت نشده.')}
@@ -489,7 +630,7 @@ function vPlan(){
   <section class="sec">
     <div class="sec-h"><h2>اهداف پس‌انداز</h2><button class="link" data-act="new-goal">+ هدف جدید</button></div>
     ${goals.length?`<div class="goals">${goals.map(g=>{const p=Math.min(100,g.saved/g.target*100||0); const left=Math.max(0,g.target-g.saved);
-      return `<div class="goal"><div class="h"><div><b>${esc(g.name)}</b><div class="small muted num">${fa(g.saved)} از ${fa(g.target)} تومان</div></div><span class="tag ${p>=100?'good':''}">${p>=100?'رسیدید!':fa(Math.round(p))+'٪'}</span></div>
+      return `<div class="goal"><div class="h"><div><b translate="no">${esc(g.name)}</b><div class="small muted num">${fa(g.saved)} از ${fa(g.target)} تومان</div></div><span class="tag ${p>=100?'good':''}">${p>=100?'رسیدید!':fa(Math.round(p))+'٪'}</span></div>
       <div class="meter"><span style="width:${p}%;background:var(--brand)"></span></div>
       <div class="small muted">${left?'مانده: '+money(left):'این هدف کامل شده است.'}</div>
       <div class="acts"><button class="btn brand" data-act="deposit" data-id="${g.id}">واریز</button><button class="btn" data-act="edit-goal" data-id="${g.id}">ویرایش</button></div></div>`;}).join('')}</div>`
@@ -498,7 +639,9 @@ function vPlan(){
 }
 
 function render(){
-  document.getElementById('today').innerHTML = `${wd.format(new Date())}<br><b class="num">${fa(T.d)} ${MONTHS[T.m-1]} ${faY(T.y)}</b>`;
+  document.getElementById('today').innerHTML = EN()
+    ? `${new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}<br><b class="num">${T.d} ${DICT[MONTHS[T.m-1]]} ${T.y}</b>`
+    : `${wd.format(new Date())}<br><b class="num">${fa(T.d)} ${MONTHS[T.m-1]} ${faY(T.y)}</b>`;
   const v = {home:vHome, tx:vTx, tasks:vTasks, plan:vPlan}[st.tab]();
   document.getElementById('view').innerHTML = v;
   document.querySelectorAll('.nav [data-tab]').forEach(b=>b.setAttribute('aria-current', b.dataset.tab===st.tab?'page':'false'));
@@ -507,8 +650,8 @@ function render(){
 /* ---------- sheets ---------- */
 const root=document.getElementById('sheetRoot');
 function openSheet(html, onMount){
-  root.innerHTML = `<div class="veil" data-act="close"><div class="sheet" dir="rtl" role="dialog" aria-modal="true"><div class="grip"></div>${html}</div></div>`;
-  const sh=root.querySelector('.sheet'); sh.addEventListener('click',e=>e.stopPropagation());
+  root.innerHTML = `<div class="veil" data-act="close"><div class="sheet" dir="${EN()?'ltr':'rtl'}" role="dialog" aria-modal="true"><div class="grip"></div>${html}</div></div>`;
+  const sh=root.querySelector('.sheet');
   onMount && onMount(sh);
 }
 const closeSheet = () => root.innerHTML='';
@@ -537,13 +680,13 @@ function sheetTx(id, type, pre){
   const catOpts = ty => (ty==='in'?IN:OUT).map(c=>[c.k,c.n]);
   openSheet(`<h3>${id?'ویرایش تراکنش':(t.type==='in'?'درآمد جدید':'هزینه جدید')}</h3>
     ${chipsHTML('type',[['out','هزینه'],['in','درآمد']],t.type)}
-    <div class="field"><label for="amt">مبلغ (تومان)</label><input class="inp big num" id="amt" inputmode="numeric" placeholder="۰" value="${t.amount?fa(t.amount):''}"><div class="hint" id="amt-h"></div></div>
+    <div class="field"><label for="amt">مبلغ (تومان)</label><input class="inp big num" id="amt" inputmode="numeric" placeholder="${EN()?'0':'۰'}" value="${t.amount?fa(t.amount):''}"><div class="hint" id="amt-h"></div></div>
     <div class="field"><span class="lab">دسته</span><div id="catwrap">${chipsHTML('cat',catOpts(t.type),t.cat)}</div></div>
     <div class="field"><label for="note">توضیح (اختیاری)</label><input class="inp" id="note" maxlength="80" placeholder="مثلاً خرید میوه" value="${esc(t.note)}"></div>
     <div class="field"><span class="lab">حوزه</span>${chipsHTML('scope',[['personal','شخصی/خانوادگی'],['villa','ویلا']],t.scope||'personal')}</div>
     <div class="field"><label for="py">طرف حساب (اختیاری)</label><input class="inp" id="py" maxlength="60" placeholder="فروشنده یا گیرنده" value="${esc(t.payee||'')}"></div>
     <div class="field"><label for="dt">تاریخ</label>${dateField('dt',t.date)}</div>
-    ${t.memo?`<div class="small muted">یادداشت: ${esc(t.memo)}</div>`:''}
+    ${t.memo?`<div class="small muted">یادداشت: <span translate="no">${esc(t.memo)}</span></div>`:''}
     <div class="err" id="err"></div>
     <button class="btn pri wide" id="save">${id?'ذخیره تغییرات':'ثبت'}</button>
     ${id?'<button class="btn danger wide" data-del>حذف</button>':''}`, sh=>{
@@ -607,7 +750,7 @@ function sheetGoal(id){
   openSheet(`<h3>${id?'ویرایش هدف':'هدف پس‌انداز جدید'}</h3>
     <div class="field"><label for="gn">نام هدف</label><input class="inp" id="gn" maxlength="60" placeholder="مثلاً صندوق اضطراری" value="${esc(g.name)}"></div>
     <div class="field"><label for="gt">مبلغ هدف (تومان)</label><input class="inp num" id="gt" inputmode="numeric" value="${g.target?fa(g.target):''}"><div class="hint" id="gt-h"></div></div>
-    <div class="field"><label for="gs">تا الان پس‌انداز شده</label><input class="inp num" id="gs" inputmode="numeric" value="${g.saved?fa(g.saved):''}" placeholder="۰"><div class="hint" id="gs-h"></div></div>
+    <div class="field"><label for="gs">تا الان پس‌انداز شده</label><input class="inp num" id="gs" inputmode="numeric" value="${g.saved?fa(g.saved):''}" placeholder="${EN()?'0':'۰'}"><div class="hint" id="gs-h"></div></div>
     <div class="err" id="err"></div>
     <button class="btn pri wide" id="save">${id?'ذخیره تغییرات':'ساخت هدف'}</button>
     ${id?'<button class="btn danger wide" data-del>حذف</button>':''}`, sh=>{
@@ -627,7 +770,7 @@ function sheetDeposit(id){
   const g=items[id]; if(!g) return;
   openSheet(`<h3>واریز به «${esc(g.name)}»</h3>
     <div class="small muted num">موجودی فعلی: ${money(g.saved)} از ${money(g.target)}</div>
-    <div class="field"><label for="dp">مبلغ</label><input class="inp big num" id="dp" inputmode="numeric" placeholder="۰"><div class="hint" id="dp-h"></div></div>
+    <div class="field"><label for="dp">مبلغ</label><input class="inp big num" id="dp" inputmode="numeric" placeholder="${EN()?'0':'۰'}"><div class="hint" id="dp-h"></div></div>
     <div class="err" id="err"></div>
     <div class="two"><button class="btn" id="wd">برداشت</button><button class="btn pri" id="ok">واریز</button></div>`, sh=>{
       wireAmount(sh,'dp');
@@ -642,7 +785,7 @@ function sheetBudget(k){
   const c=catOf(k); const b=budgets()[k]; const sp=spendByCat(txIn(st.py,st.pm))[k]||0;
   openSheet(`<h3>سقف ماهانه «${c.n}»</h3>
     <div class="small muted num">خرج ${mLabel(st.py,st.pm)}: ${money(sp)}</div>
-    <div class="field"><label for="bl">سقف هر ماه (تومان)</label><input class="inp big num" id="bl" inputmode="numeric" value="${b?fa(b.limit):''}" placeholder="۰"><div class="hint" id="bl-h"></div></div>
+    <div class="field"><label for="bl">سقف هر ماه (تومان)</label><input class="inp big num" id="bl" inputmode="numeric" value="${b?fa(b.limit):''}" placeholder="${EN()?'0':'۰'}"><div class="hint" id="bl-h"></div></div>
     <div class="err" id="err"></div>
     <button class="btn pri wide" id="save">ذخیره سقف</button>
     ${b?'<button class="btn danger wide" data-del>حذف سقف</button>':''}`, sh=>{
@@ -798,17 +941,70 @@ function parseSentence(raw){
   const cat = type==='in' ? (/حقوق/.test(s)?'salary': /فروش|فروختم|پروژه|آزاد/.test(s)?'free':'other_in') : categorize(note,s);
   return {kind:'tx', type, amount, cat, note:note||s, date:when.date||todayISO(), scope, guess, raw};
 }
-function parseAll(text){
-  return String(text||'').split(/\n|\.\s|؛|(?:\s+و\s+بعد\s+)/).map(x=>x.trim()).filter(Boolean).map(parseSentence).filter(Boolean);
+
+const CAT_RULES_EN = [
+  ['pet',/\b(cat|dog|pet)\b/i],['digital',/subscription|\bapp\b|software|claude|vpn/i],['debt',/loan|installment|debt|repay/i],
+  ['family',/allowance|pocket money|monthly to/i],['labor',/wage|labor|labour|worker|workman/i],['build',/cement|iron|steel|pipe|material|construction|brick|tile/i],
+  ['car',/\bcar\b|mechanic|tire|tyre|garage|spare part|car wash/i],['health',/medicine|doctor|pharmacy|dentist|hospital|clinic/i],
+  ['eatout',/restaurant|cafe|café|dinner|lunch|breakfast|pizza|cake|takeaway|snack/i],
+  ['food',/bread|fruit|grocer|milk|egg|coffee|tea|rice|meat|chicken|honey|water|vegetable|supermarket|cheese|yogurt|food/i],
+  ['transport',/fuel|petrol|gas\b|gasoline|taxi|snapp|uber|metro|bus\b|parking|toll|fare/i],['home',/rent|clean|detergent|household/i],
+  ['bills',/bill|electric|internet|phone|mobile/i],['repair',/tool|repair|hardware/i],['personal',/cigarette|haircut|barber/i],
+  ['shop',/clothes|shoes|shirt|shopping/i],['fun',/cinema|movie|travel|hotel|ticket|concert|game/i],['edu',/book|class|course|tuition|school|university/i],
+];
+const EN_NUM = {zero:0,one:1,a:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90,hundred:100,half:0.5};
+const EN_SCALE = {thousand:1e3,k:1e3,million:1e6,m:1e6,mil:1e6,billion:1e9,b:1e9};
+const EN_WEEK = {sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6};
+function parseSentenceEn(raw){
+  let s=String(raw).toLowerCase().replace(/,(?=\d{3})/g,'').replace(/(\d)(k|m)\b/g,'$1 $2').replace(/[.!?]+$/,'').trim(); if(!s) return null;
+  const isTask=/remind|need to|have to|must|meeting|appointment|\bcall\b|\bpay\b|\bbuy\b|due/.test(s), past=/bought|paid|spent|got|cost|was\b|filled/.test(s);
+  const kind = isTask && !past ? 'task':'tx';
+  const t=todayISO(); let date=null, time='', used=[];
+  const rel=[['day after tomorrow',2],['tomorrow',1],['yesterday',-1],['today',0],['tonight',0]];
+  for(const [w,d] of rel) if(s.includes(w)){ date=addDays(t,d); used.push(w); break; }
+  if(!date) for(const w in EN_WEEK){ const m=s.match(new RegExp('(next |on |last )?'+w)); if(m){ const now=new Date(t+'T12:00:00').getDay(); let diff=(EN_WEEK[w]-now+7)%7;
+      date = kind==='task' ? addDays(t, diff===0&&/next/.test(m[0])?7:diff) : addDays(t, diff===0?0:diff-7); used.push(m[0]); break; } }
+  const tm=s.match(/\bat (\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?/) || s.match(/\b(\d{1,2}):(\d{2})\s*(am|pm)?/);
+  if(tm){ let h=+tm[1], mi=tm[2]?+tm[2]:0; const ap=tm[3]||''; if(/p/.test(ap)&&h<12) h+=12; if(/a/.test(ap)&&h===12) h=0;
+    if(!ap && /evening|night|afternoon/.test(s) && h<12) h+=12; if(h<24){ time=`${pad(h)}:${pad(mi)}`; used.push(tm[0]); } }
+  let rest=s; used.forEach(u=>rest=rest.replace(u,' '));
+  const tok=rest.split(/\s+/).filter(Boolean); let best=null;
+  for(let i=0;i<tok.length;i++){
+    const isN=w=>/^\d+(\.\d+)?$/.test(w)||(w in EN_NUM && w!=='a')||(w in EN_SCALE && i>0);
+    if(!isN(tok[i])) continue; let total=0,cur=0,hasScale=false,j=i;
+    while(j<tok.length){ const w=tok[j];
+      if(/^\d+(\.\d+)?$/.test(w)){ cur+=parseFloat(w); j++; }
+      else if(w in EN_NUM && w!=='a'){ cur = EN_NUM[w]===100? (cur||1)*100 : cur+EN_NUM[w]; j++; }
+      else if(w in EN_SCALE && j>i){ total+=(cur||1)*EN_SCALE[w]; cur=0; hasScale=true; j++; }
+      else if((w==='and'||w==='point') && tok[j+1] && /^\d|^[a-z]/.test(tok[j+1]) && (tok[j+1] in EN_NUM || /^\d/.test(tok[j+1]))){ j++; }
+      else break; }
+    total+=cur; if(total>0 && (!best || total>best.v)) best={i,j,v:total,hasScale}; i=j;
+  }
+  let amount=0, guess=false;
+  if(best){ amount=best.v; const after=tok[best.j]||''; if(/^rials?$/.test(after)) amount/=10; else if(!best.hasScale && amount<1000){ amount*=1000; guess=true; } amount=Math.round(amount); }
+  let words=tok.slice(); if(best) words.splice(best.i,best.j-best.i);
+  let note=words.join(' ').replace(/\b(tomans?|rials?|for|on|i|remind me to|remind me|please|in the|morning|evening|afternoon|night|spent|bought|paid|was|got|cost|received|the)\b/g,' ').replace(/\s+/g,' ').trim();
+  note = note.charAt(0).toUpperCase()+note.slice(1);
+  const scope=/villa/.test(s)?'villa':'personal';
+  if(kind==='task'){ const tag=/bill|electric|internet/.test(s)?'قبض':/loan|installment/.test(s)?'قسط':/buy|shopping/.test(s)?'خرید':/meeting|work|office/.test(s)?'کار':'شخصی';
+    return {kind:'task',title:note||raw,due:date||(time?t:''),time,tag,amount,guess,remind:15,repeat:'none',raw}; }
+  const type=/salary|income|received|got paid|earned|sold/.test(s)?'in':'out';
+  let cat='other'; if(type==='in') cat=/salary/.test(s)?'salary':/freelance|project|sold/.test(s)?'free':'other_in';
+  else for(const [k,re] of CAT_RULES_EN) if(re.test(s)){ cat=k; break; }
+  return {kind:'tx',type,amount,cat,note:note||raw,date:date||t,scope,guess,raw};
 }
-window.__sp = {parseAll, parseSentence, categorize, j2g};
+
+function parseAll(text){
+  return String(text||'').split(/\n|\.\s|؛|(?:\s+و\s+بعد\s+)/).map(x=>x.trim()).filter(Boolean).map(x=> /[a-z]/i.test(x) && !/[\u0600-\u06FF]/.test(x) ? parseSentenceEn(x) : parseSentence(x)).filter(Boolean);
+}
+window.__sp = {parseAll, parseSentence, categorize, j2g, parseSentenceEn:(...a)=>parseSentenceEn(...a), tr:(...a)=>tr(...a)};
 
 /* ---------- quick entry UI ---------- */
 function quickBox(){
   return `<section class="sec qe-sec">
     <div class="qe">
       <label for="qe" class="qe-lab"><span class="mic" aria-hidden="true"></span>بگو یا بنویس</label>
-      <textarea id="qe" rows="2" placeholder="مثلاً: نون بربری ۱۴۵ هزار تومن خریدم&#10;فردا ساعت ۱۰ صبح قسط وام رو بدم">${esc(st.qe||'')}</textarea>
+      <textarea id="qe" rows="2" placeholder="${EN()?'e.g. Bought bread for 145 thousand toman&#10;Pay the loan installment tomorrow at 10am':'مثلاً: نون بربری ۱۴۵ هزار تومن خریدم&#10;فردا ساعت ۱۰ صبح قسط وام رو بدم'}">${esc(st.qe||'')}</textarea>
       <div class="qe-row"><span class="small muted">برای گفتن با صدا، روی کادر بزنید و میکروفون کیبورد Gboard را بزنید.</span><button class="btn pri" data-act="qe-go">ثبت</button></div>
     </div></section>`;
 }
@@ -821,8 +1017,8 @@ function runQuick(){
 }
 function sheetReview(list){
   const row=(p,i)=> p.kind==='task'
-    ? `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b>${esc(p.title)}</b><span class="s">کار · ${p.due?dayLabel(p.due):'بدون تاریخ'}${p.time?' · '+toFa(p.time):''}</span></span></label>`
-    : `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b>${esc(p.note)}</b><span class="s">${p.type==='in'?'درآمد':'هزینه'} · ${esc(catOf(p.cat).n)} · ${dayLabel(p.date)}</span></span><span class="amt num ${p.type}">${p.amount?fa(p.amount):'—'}</span></label>`;
+    ? `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b translate="no">${esc(p.title)}</b><span class="s">کار · ${p.due?dayLabel(p.due):'بدون تاریخ'}${p.time?' · '+toFa(p.time):''}</span></span></label>`
+    : `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b translate="no">${esc(p.note)}</b><span class="s">${p.type==='in'?'درآمد':'هزینه'} · ${esc(catOf(p.cat).n)} · ${dayLabel(p.date)}</span></span><span class="amt num ${p.type}">${p.amount?fa(p.amount):'—'}</span></label>`;
   openSheet(`<h3>${fa(list.length)} مورد پیدا شد</h3>
     <div class="small muted">موارد را بررسی کنید. مواردی که مبلغ ندارند ثبت نمی‌شوند؛ بعداً می‌توانید آن‌ها را جدا وارد کنید.</div>
     <div class="list">${list.map(row).join('')}</div>
@@ -888,21 +1084,21 @@ const SCOPE_N = {personal:'شخصی/خانوادگی', villa:'ویلا'};
 async function exportExcel(){
   const tx=all('tx').sort((a,b)=>(a.date+(a.created||'')).localeCompare(b.date+(b.created||'')));
   if(!tx.length && !all('task').length){ toast('هنوز چیزی برای خروجی نیست'); return; }
-  const rows=[['ردیف','تاریخ شمسی','نوع','حوزه','دسته‌بندی','شرح','طرف حساب','مبلغ (تومان)','روش پرداخت','یادداشت']];
-  tx.forEach((t,i)=>rows.push([i+1, jDate(t.date), t.type==='in'?'درآمد':'هزینه', SCOPE_N[t.scope||'personal'], t.sub||catOf(t.cat).n, t.note||'', t.payee||'', t.amount, t.method||'', t.memo||'']));
+  const rows=[['ردیف','تاریخ شمسی','نوع','حوزه','دسته‌بندی','شرح','طرف حساب','مبلغ (تومان)','روش پرداخت','یادداشت'].map(tr)];
+  tx.forEach((t,i)=>rows.push([i+1, jDate(t.date), tr(t.type==='in'?'درآمد':'هزینه'), tr(SCOPE_N[t.scope||'personal']), EN()? tr(catOf(t.cat).n) : (t.sub||catOf(t.cat).n), t.note||'', t.payee||'', t.amount, t.method||'', t.memo||'']));
   const months={}; tx.forEach(t=>{ const j=jp(t.date), k=j.y*100+j.m; const o=months[k]||(months[k]={y:j.y,m:j.m,i:0,o:0,v:0}); if(t.type==='in') o.i+=t.amount; else { o.o+=t.amount; if(t.scope==='villa') o.v+=t.amount; } });
-  const sum=[['ماه','درآمد','هزینه کل','هزینه ویلا','مانده']];
-  Object.keys(months).sort().forEach(k=>{ const o=months[k]; sum.push([mLabel(o.y,o.m), o.i, o.o, o.v, o.i-o.o]); });
-  const bycat={}; tx.filter(t=>t.type==='out').forEach(t=>{ const n=catOf(t.cat).n; bycat[n]=(bycat[n]||0)+t.amount; });
-  sum.push([]); sum.push(['دسته','جمع هزینه']); Object.entries(bycat).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>sum.push([n,v]));
-  const tasks=[['عنوان','نوع','تاریخ','ساعت','مبلغ (تومان)','تکرار','وضعیت']];
-  all('task').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).forEach(t=>tasks.push([t.title,t.tag||'',jDate(t.due),t.time||'',t.amount||'',REPEAT_N[t.repeat||'none'],t.done?'انجام شد':'باز']));
+  const sum=[['ماه','درآمد','هزینه کل','هزینه ویلا','مانده'].map(tr)];
+  Object.keys(months).sort().forEach(k=>{ const o=months[k]; sum.push([EN()? `${DICT[MONTHS[o.m-1]]} ${o.y}` : mLabel(o.y,o.m), o.i, o.o, o.v, o.i-o.o]); });
+  const bycat={}; tx.filter(t=>t.type==='out').forEach(t=>{ const n=tr(catOf(t.cat).n); bycat[n]=(bycat[n]||0)+t.amount; });
+  sum.push([]); sum.push(['دسته','جمع هزینه'].map(tr)); Object.entries(bycat).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>sum.push([n,v]));
+  const tasks=[['عنوان','نوع','تاریخ','ساعت','مبلغ (تومان)','تکرار','وضعیت'].map(x=>x==='ساعت'&&EN()?'Time':tr(x))];
+  all('task').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).forEach(t=>tasks.push([t.title,tr(t.tag||''),jDate(t.due),t.time||'',t.amount||'',tr(REPEAT_N[t.repeat||'none']),tr(t.done?'انجام شد':'باز')]));
   const blob=xlsxBlob([
-    {name:'دفتر مالی',rows,widths:[6,12,8,15,22,44,20,15,14,40]},
-    {name:'خلاصه',rows:sum,widths:[22,16,16,16,16]},
-    {name:'کارها',rows:tasks,widths:[36,10,12,8,15,10,10]}]);
+    {name:tr('دفتر مالی'),rows,widths:[6,12,8,15,22,44,20,15,14,40]},
+    {name:tr('خلاصه'),rows:sum,widths:[22,16,16,16,16]},
+    {name:tr('کارها'),rows:tasks,widths:[36,10,12,8,15,10,10]}]);
   const j=jp(todayISO());
-  await saveFile(blob, `SayPay_${j.y}-${pad(j.m)}-${pad(j.d)}.xlsx`, 'خروجی SayPay');
+  await saveFile(blob, `SayPay_${j.y}-${pad(j.m)}-${pad(j.d)}.xlsx`, tr('خروجی SayPay'));
 }
 
 /* ---------- xlsx / csv reader ---------- */
@@ -1008,7 +1204,7 @@ function sheetImport(){
           const villa=ready.filter(t=>t.scope==='villa').length;
           xr.innerHTML = ready.length? `<div class="tip"><b>${fa(ready.length)} هزینه آماده ورود</b>
             <span>از ${dayLabel(dates[0])} تا ${dayLabel(dates[dates.length-1])} · جمع ${money(total)}${villa?' · '+fa(villa)+' مورد ویلا':''}${dup.length?' · '+fa(dup.length)+' مورد تکراری کنار گذاشته شد':''}</span></div>
-            <div class="list">${ready.slice(0,5).map(t=>`<div class="item"><span class="dot" style="background:${col(catOf(t.cat).c)}">${esc(catOf(t.cat).n.slice(0,1))}</span><span class="main"><span class="t" style="display:block">${esc(t.note)}</span><span class="s">${esc(catOf(t.cat).n)} · ${dayLabel(t.date)}</span></span><span class="amt num">${fa(t.amount)}</span></div>`).join('')}</div>`
+            <div class="list">${ready.slice(0,5).map(t=>`<div class="item"><span class="dot" style="background:${col(catOf(t.cat).c)}">${esc(tr(catOf(t.cat).n).slice(0,1))}</span><span class="main"><span class="t" style="display:block" translate="no">${esc(t.note)}</span><span class="s">${esc(catOf(t.cat).n)} · ${dayLabel(t.date)}</span></span><span class="amt num">${fa(t.amount)}</span></div>`).join('')}</div>`
             : `<div class="tip"><b>همه این موارد قبلاً وارد شده‌اند.</b></div>`;
           go.disabled=!ready.length; go.textContent=`وارد کردن ${fa(ready.length)} مورد`;
         }catch(x){ xr.innerHTML=''; err.textContent = x.message==='old'? 'برای خواندن اکسل، iOS را به نسخه ۱۶٫۴ یا جدیدتر به‌روز کنید، یا فایل را CSV ذخیره کنید.' : x.message==='nocols'? 'ستون «تاریخ» و «مبلغ» در این فایل پیدا نشد.' : 'این فایل خوانده نشد. مطمئن شوید فایل ‎.xlsx یا ‎.csv است.'; }
@@ -1028,7 +1224,7 @@ function icsFold(line){ const out=[]; let cur=''; for(const ch of line){ if((cur
 function icsEvents(t){
   const dates=[t.due]; if(t.repeat==='monthly') for(let i=1;i<12;i++) dates.push(addJMonths(t.due,i));
   const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
-  const title=t.title+(t.amount?' — '+fa(t.amount)+' تومان':'');
+  const title=t.title+(t.amount?' — '+fa(t.amount)+' '+tr('تومان'):'');
   return dates.map((d,i)=>{
     const L=['BEGIN:VEVENT',`UID:${t.id||uid('t')}-${i}@saypay`,`DTSTAMP:${stamp}`];
     const dd=d.replace(/-/g,'');
@@ -1036,7 +1232,7 @@ function icsEvents(t){
       L.push(`DTSTART:${st0}`,`DTEND:${isoOf(e).replace(/-/g,'')}T${pad(e.getHours())}${pad(e.getMinutes())}00`); }
     else L.push(`DTSTART;VALUE=DATE:${dd}`,`DTEND;VALUE=DATE:${addDays(d,1).replace(/-/g,'')}`);
     if(t.repeat==='weekly') L.push('RRULE:FREQ=WEEKLY;COUNT=52');
-    L.push('SUMMARY:'+icsEsc(title),'DESCRIPTION:'+icsEsc('از SayPay · '+(t.tag||'')));
+    L.push('SUMMARY:'+icsEsc(title),'DESCRIPTION:'+icsEsc(tr('از SayPay')+' · '+tr(t.tag||'')));
     const trig = t.time ? (+(t.remind??15)===0?'-PT0M': `-PT${+(t.remind??15)}M`) : (+(t.remind??15)>=1440?'-PT15H':'PT9H');
     L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(title),'TRIGGER:'+trig,'END:VALARM','END:VEVENT');
     return L.map(icsFold).join('\r\n');
@@ -1056,7 +1252,7 @@ function calendarAll(){
 
 /* ---------- toast ---------- */
 let tt; function toast(m){ clearTimeout(tt); let el=document.querySelector('.toast'); if(!el){ el=document.createElement('div'); el.className='toast'; el.setAttribute('role','status'); document.body.appendChild(el); }
-  el.textContent=m; tt=setTimeout(()=>el.remove(),2000); }
+  el.textContent=tr(m); tt=setTimeout(()=>el.remove(),2000); }
 
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{
@@ -1083,6 +1279,7 @@ document.addEventListener('click',e=>{
     case 'import': sheetImport(); break;
     case 'calall': calendarAll(); break;
     case 'scope': st.scope=a.dataset.k; render(); break;
+    case 'lang': setLang(EN()?'fa':'en'); break;
     case 'filter': st.filter=a.dataset.k; render(); break;
     case 'tseg': st.tseg=a.dataset.k; render(); break;
     case 'vm': { const p=shiftM(st.vy,st.vm,+a.dataset.d); st.vy=p.y; st.vm=p.m; render(); break; }
@@ -1096,7 +1293,8 @@ document.addEventListener('click',e=>{
 document.addEventListener('input',e=>{ if(e.target && e.target.id==='qe') st.qe=e.target.value; });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
 
-initStore();
+applyLang(); observe();
+initStore(); trNode(document.body);
 if('serviceWorker' in navigator){ addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 })();
 </script>
