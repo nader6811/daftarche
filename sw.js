@@ -1,5 +1,5 @@
 // Offline cache for Daftarche. Bump VERSION after changing any file.
-const VERSION = 'daftarche-v1';
+const VERSION = 'saypay-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

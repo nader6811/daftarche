@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>دفترچه روزانه</title>
+<title>SayPay</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="دفترچه">
+<meta name="apple-mobile-web-app-title" content="SayPay">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#edf1ee" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d1512" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#eef0f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -19,25 +19,25 @@
 <style>
 /* Layout: single phone column, sticky header, bottom tab bar with central add button; ledger-green ink with a saffron accent */
 :root{
-  --bg:#edf1ee; --surface:#ffffff; --surface2:#e2e9e4; --ink:#13221d; --muted:#5b6c65; --line:#d2dbd6;
-  --brand:#1d5c48; --brand-soft:#d6e7df; --accent:#c4860f; --accent-soft:#f6e7c8; --on-accent:#1d1404;
-  --pos:#1f7f55; --neg:#bf3f2d; --neg-soft:#f7dcd6;
-  --c0:#1d5c48; --c1:#c4860f; --c2:#3b6fb0; --c3:#a5466b; --c4:#6b8f2a; --c5:#7a5bb5; --c6:#c0603a; --c7:#4a8f93; --c8:#7b7f86;
+  --bg:#eef0f4; --surface:#ffffff; --surface2:#e3e7ee; --ink:#111a2e; --muted:#5a6478; --line:#d6dbe4;
+  --brand:#14213d; --brand-soft:#dfe4f0; --accent:#e3c58d; --accent-soft:#f4ead6; --on-accent:#14213d; --gold:#9a7634;
+  --pos:#1f7a52; --neg:#bf3f2d; --neg-soft:#f7dcd6;
+  --c0:#14213d; --c1:#b98a3c; --c2:#3b6fb0; --c3:#a5466b; --c4:#5f8a2a; --c5:#7a5bb5; --c6:#c0603a; --c7:#3f8a8f; --c8:#7b7f86;
   --font-ui:"Vazirmatn",Tahoma,"Segoe UI",system-ui,sans-serif;
   --font-brand:"Lalezar","Vazirmatn",Tahoma,sans-serif;
   --r:16px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0d1512; --surface:#15201c; --surface2:#1d2a25; --ink:#e6eee9; --muted:#97a9a0; --line:#2a3832;
-  --brand:#7cc6a6; --brand-soft:#1b3329; --accent:#e5a93c; --accent-soft:#3a2d14; --on-accent:#1d1404;
+  --bg:#0b1220; --surface:#131c2e; --surface2:#1b2639; --ink:#e9edf5; --muted:#98a3b8; --line:#263248;
+  --brand:#e3c58d; --brand-soft:#2c2a22; --accent:#e3c58d; --accent-soft:#2f2b1e; --on-accent:#14213d; --gold:#e3c58d;
   --pos:#57c792; --neg:#ef7d6b; --neg-soft:#3b1f1a;
-  --c0:#7cc6a6; --c1:#e5a93c; --c2:#7aa8e6; --c3:#e083a6; --c4:#a6c95e; --c5:#ad93e6; --c6:#ec9370; --c7:#7fc5c9; --c8:#a3a8b0;
+  --c0:#9fb3dc; --c1:#e3c58d; --c2:#7aa8e6; --c3:#e083a6; --c4:#a6c95e; --c5:#ad93e6; --c6:#ec9370; --c7:#7fc5c9; --c8:#a3a8b0;
   color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0d1512; --surface:#15201c; --surface2:#1d2a25; --ink:#e6eee9; --muted:#97a9a0; --line:#2a3832;
-  --brand:#7cc6a6; --brand-soft:#1b3329; --accent:#e5a93c; --accent-soft:#3a2d14; --on-accent:#1d1404;
+  --bg:#0b1220; --surface:#131c2e; --surface2:#1b2639; --ink:#e9edf5; --muted:#98a3b8; --line:#263248;
+  --brand:#e3c58d; --brand-soft:#2c2a22; --accent:#e3c58d; --accent-soft:#2f2b1e; --on-accent:#14213d; --gold:#e3c58d;
   --pos:#57c792; --neg:#ef7d6b; --neg-soft:#3b1f1a;
-  --c0:#7cc6a6; --c1:#e5a93c; --c2:#7aa8e6; --c3:#e083a6; --c4:#a6c95e; --c5:#ad93e6; --c6:#ec9370; --c7:#7fc5c9; --c8:#a3a8b0;
+  --c0:#9fb3dc; --c1:#e3c58d; --c2:#7aa8e6; --c3:#e083a6; --c4:#a6c95e; --c5:#ad93e6; --c6:#ec9370; --c7:#7fc5c9; --c8:#a3a8b0;
   color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -56,7 +56,9 @@ button{cursor:pointer}
 
 /* header */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 10px}
-.brand{font-family:var(--font-brand);font-size:28px;line-height:1;color:var(--brand);letter-spacing:0}
+.brand{font-family:"Vazirmatn",Helvetica,Arial,sans-serif;font-weight:800;font-size:26px;line-height:1;color:var(--brand);direction:ltr;display:inline-flex;align-items:center;gap:8px}
+.brand em{font-style:normal;color:var(--gold)}
+.brand svg{width:26px;height:26px;border-radius:7px}
 .today{font-size:13px;color:var(--muted);text-align:left}
 .store{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:2px}
 .store i{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block}
@@ -70,13 +72,13 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 .small{font-size:12.5px}
 
 /* balance */
-.ledger{background:var(--brand);color:#f3f8f5;border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:14px;margin-top:4px}
-:root[data-theme="dark"] .ledger{color:#0d1512}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ledger{color:#0d1512}}
+.ledger{background:var(--brand);color:#f4ecdc;border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:14px;margin-top:4px}
+:root[data-theme="dark"] .ledger{color:#14213d}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ledger{color:#14213d}}
 .ledger .lbl{font-size:12.5px;opacity:.8}
 .ledger .big{font-size:30px;font-weight:800;line-height:1.2}
 .ledger .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ledger .mini{background:rgba(255,255,255,.12);border-radius:12px;padding:8px 12px}
+.ledger .mini{background:rgba(255,255,255,.1);border-radius:12px;padding:8px 12px}
 .ledger .mini b{display:block;font-size:16px}
 .meter{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .ledger .meter{background:rgba(255,255,255,.2)}
@@ -189,6 +191,24 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 .err{color:var(--neg);font-size:13px;min-height:1em}
 .tip{background:var(--surface);border-radius:var(--r);padding:14px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
 .tip b{color:var(--ink)}
+.qe{background:var(--surface);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;border:1.5px solid var(--line)}
+.qe:focus-within{border-color:var(--gold)}
+.qe-lab{font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px}
+.mic{width:22px;height:22px;border-radius:7px;background:var(--brand);display:inline-block;
+  -webkit-mask:linear-gradient(#000 0 0);position:relative}
+.mic::before{content:"";position:absolute;inset:4px 8px 7px;border-radius:6px;background:var(--accent)}
+.mic::after{content:"";position:absolute;left:9px;right:9px;bottom:3px;height:2px;background:var(--accent)}
+.qe textarea{border:0;background:transparent;resize:none;font:inherit;font-size:16px;color:var(--ink);width:100%;min-height:52px;outline:none}
+.qe-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qe-row .btn{flex:none}
+.rv{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.rv:last-child{border-bottom:0}
+.rv input{width:20px;height:20px;accent-color:var(--brand);flex:none}
+.rv .main{flex:1;min-width:0;display:flex;flex-direction:column}
+.rv .s{font-size:12.5px;color:var(--muted)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.btn.line{background:transparent;border:1.5px solid var(--line)}
+.vtag{font-size:10.5px;font-weight:700;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:0 5px;margin-inline-start:4px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:12px;font-size:13.5px;font-weight:700}
 </style>
 </head>
@@ -198,7 +218,7 @@ h2{font-size:16px;font-weight:800;margin:0;text-wrap:balance}
 <div class="app" dir="rtl" lang="fa" id="app">
   <header class="top">
     <div>
-      <div class="brand">دفترچه</div>
+      <div class="brand"><svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="#14213d"/><g stroke="#e3c58d" stroke-width="9" stroke-linecap="round"><path d="M22 42v16"/><path d="M36 30v40"/><path d="M50 18v64"/><path d="M64 30v40"/><path d="M78 42v16"/></g></svg><span>Say<em>Pay</em></span></div>
       <div class="store" id="store"><i></i><span>در حال آماده‌سازی…</span></div>
     </div>
     <div class="today" id="today"></div>
@@ -225,21 +245,25 @@ document.documentElement.setAttribute('lang','fa');
 
 /* ---------- categories ---------- */
 const OUT = [
-  {k:'food',n:'خوراک',c:0},{k:'home',n:'خانه و اجاره',c:2},{k:'bills',n:'قبوض',c:1},{k:'transport',n:'رفت‌وآمد',c:7},
-  {k:'shop',n:'خرید',c:3},{k:'health',n:'سلامت',c:4},{k:'fun',n:'تفریح',c:5},{k:'edu',n:'آموزش',c:6},{k:'loan',n:'قسط و وام',c:8},{k:'other',n:'سایر',c:8}
+  {k:'food',n:'خوراک و خواربار',c:0},{k:'eatout',n:'رستوران و پذیرایی',c:6},{k:'home',n:'خانه و خانوار',c:2},{k:'bills',n:'قبوض',c:1},
+  {k:'transport',n:'سوخت و رفت‌وآمد',c:7},{k:'car',n:'خودرو و تعمیر',c:3},{k:'build',n:'مصالح و ساخت‌وساز',c:5},{k:'repair',n:'لوازم و تعمیرات',c:4},
+  {k:'labor',n:'دستمزد',c:8},{k:'health',n:'درمان و دارو',c:4},{k:'family',n:'ماهیانه و کمک خانواده',c:5},{k:'debt',n:'بدهی، قسط و وام',c:3},
+  {k:'personal',n:'روزمره شخصی',c:6},{k:'shop',n:'پوشاک و خرید',c:3},{k:'digital',n:'اشتراک دیجیتال',c:2},{k:'pet',n:'حیوان خانگی',c:1},
+  {k:'fun',n:'تفریح و سفر',c:5},{k:'edu',n:'آموزش',c:6},{k:'other',n:'سایر',c:8}
 ];
 const IN = [{k:'salary',n:'حقوق',c:0},{k:'free',n:'کار آزاد',c:2},{k:'gift',n:'هدیه',c:5},{k:'other_in',n:'سایر درآمد',c:8}];
 const TAGS = ['شخصی','کار','قبض','قسط','خرید'];
-const catOf = k => OUT.find(c=>c.k===k) || IN.find(c=>c.k===k) || {k:'other',n:'سایر',c:8};
+const catOf = k => (k==='loan'&&(k='debt'), OUT.find(c=>c.k===k) || IN.find(c=>c.k===k) || {k:'other',n:'سایر',c:8});
 const col = c => `var(--c${c})`;
 
 /* ---------- format helpers ---------- */
 const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
 const fa = n => Number(n||0).toLocaleString('fa-IR');
 const faY = n => Number(n).toLocaleString('fa-IR',{useGrouping:false});
-const money = n => fa(Math.round(n)) + ' تومان';
+const signed = n => n<0 ? '\u2066−'+fa(Math.abs(n))+'\u2069' : fa(n);
+const money = n => signed(Math.round(n)) + ' تومان';
 const short = n => { n=Math.round(n); const a=Math.abs(n);
-  if(a>=1e9) return fa(+(n/1e9).toFixed(1))+' میلیارد'; if(a>=1e6) return fa(+(n/1e6).toFixed(1))+' میلیون'; if(a>=1e3) return fa(Math.round(n/1e3))+' هزار'; return fa(n); };
+  if(a>=1e9) return signed(+(n/1e9).toFixed(1))+' میلیارد'; if(a>=1e6) return signed(+(n/1e6).toFixed(1))+' میلیون'; if(a>=1e3) return signed(Math.round(n/1e3))+' هزار'; return signed(n); };
 const toEn = s => String(s||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
 const parseAmt = s => { const v = parseInt(toEn(s).replace(/[^\d]/g,''),10); return isNaN(v)?0:v; };
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -320,14 +344,14 @@ const budgets = () => { const b={}; all('budget').forEach(x=>b[x.cat]=x); return
 
 /* ---------- state ---------- */
 const T = jp(todayISO());
-const st = { tab:'home', vy:T.y, vm:T.m, filter:'all', tseg:'today', py:T.y, pm:T.m };
+const st = { scope:'all', qe:'', tab:'home', vy:T.y, vm:T.m, filter:'all', tseg:'today', py:T.y, pm:T.m };
 
 /* ---------- views ---------- */
 function txRow(t){
   const c=catOf(t.cat); const sign=t.type==='in'?'+':'−';
   return `<button class="item" data-act="edit-tx" data-id="${t.id}">
     <span class="dot" style="background:${col(c.c)}">${esc(c.n.slice(0,1))}</span>
-    <span class="main"><span class="t" style="display:block">${esc(t.note||c.n)}</span><span class="s">${esc(c.n)} · ${dayLabel(t.date)}</span></span>
+    <span class="main"><span class="t" style="display:block">${esc(t.note||c.n)}</span><span class="s">${esc(c.n)}${t.scope==='villa'?'<span class="vtag">ویلا</span>':''} · ${dayLabel(t.date)}</span></span>
     <span class="amt num ${t.type}">${sign}${fa(t.amount)}</span></button>`;
 }
 function taskRow(t){
@@ -337,7 +361,7 @@ function taskRow(t){
     <button class="chk ${t.done?'on':''}" data-act="toggle" data-id="${t.id}" aria-label="${t.done?'برگرداندن':'انجام شد'}"></button>
     <button class="main" data-act="edit-task" data-id="${t.id}"><span class="t" style="display:block">${esc(t.title)}</span>
       <span class="s">${late?'<span style="color:var(--neg);font-weight:700">عقب‌افتاده · </span>':''}${when}${t.amount?' · '+money(t.amount):''}</span></button>
-    ${t.tag?`<span class="tag">${esc(t.tag)}</span>`:''}</div>`;
+    ${t.repeat&&t.repeat!=='none'?`<span class="tag">${REPEAT_N[t.repeat]}</span>`:''}${t.tag?`<span class="tag">${esc(t.tag)}</span>`:''}</div>`;
 }
 const toFa = s => String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 
@@ -364,7 +388,8 @@ function vHome(){
     ${totalLimit?`<div><div class="lbl" style="display:flex;justify-content:space-between"><span>از بودجه ماه</span><span class="num">${fa(Math.round(s.o/totalLimit*100))}٪</span></div>
       <div class="meter ${s.o>totalLimit?'over':''}" style="margin-top:6px"><span style="width:${pct}%"></span></div></div>`:''}
   </section>
-  ${nothing? `<div class="sec">${emptyBox('هنوز چیزی ثبت نکرده‌اید. با دکمه زرد پایین صفحه اولین هزینه، درآمد، کار یا هدف را اضافه کنید.', true)}</div>`:''}
+  ${quickBox()}
+  ${nothing? `<div class="sec">${emptyBox('هنوز چیزی ثبت نکرده‌اید. با دکمه زرد پایین صفحه اولین هزینه، درآمد، کار یا هدف را اضافه کنید، یا فایل اکسل قبلی‌تان را از پایین صفحه وارد کنید.', true)}</div>`:''}
   <section class="sec">
     <div class="sec-h"><h2>کارهای امروز</h2><button class="link" data-tab="tasks">همه کارها</button></div>
     ${tasks.length? `<div class="list">${tasks.slice(0,5).map(taskRow).join('')}</div>` : emptyBox('کار باز امروز ندارید.')}
@@ -378,7 +403,10 @@ function vHome(){
   </section>
   <section class="sec"><div class="tip"><b>پشتیبان‌گیری</b>
     <span>اطلاعات فقط روی همین گوشی است. هر چند وقت یک‌بار پشتیبان بگیرید و فایلش را در Files یا تلگرام نگه دارید.${lastBackup()?' آخرین پشتیبان: '+dayLabel(lastBackup())+'.':' هنوز پشتیبانی نگرفته‌اید.'}</span>
-    <div class="two" style="margin-top:6px"><button class="btn brand" data-act="backup">گرفتن پشتیبان</button><button class="btn" data-act="restore">بازگردانی</button></div></div></section>`;
+    <div class="two" style="margin-top:6px"><button class="btn brand" data-act="backup">گرفتن پشتیبان</button><button class="btn" data-act="restore">بازگردانی</button></div></div></section>
+  <section class="sec"><div class="tip"><b>اکسل</b>
+    <span>هزینه‌ها را به اکسل ببرید یا فایل اکسلی که قبلاً داشتید (مثلاً از ChatGPT) را وارد کنید. موارد تکراری خودکار کنار گذاشته می‌شوند.</span>
+    <div class="two" style="margin-top:6px"><button class="btn brand" data-act="export">خروجی اکسل</button><button class="btn" data-act="import">ورود از اکسل</button></div></div></section>`;
 }
 
 function monthBar(y,m,act){
@@ -386,7 +414,8 @@ function monthBar(y,m,act){
 }
 
 function vTx(){
-  let list=txIn(st.vy,st.vm); const s=sums(list);
+  let list=txIn(st.vy,st.vm); if(st.scope!=='all') list=list.filter(t=>(t.scope||'personal')===st.scope); const s=sums(list);
+  const villaOut=txIn(st.vy,st.vm).filter(t=>t.type==='out'&&t.scope==='villa').reduce((a,t)=>a+t.amount,0);
   if(st.filter!=='all') list=list.filter(t=>t.type===st.filter);
   list.sort((a,b)=>(b.date+b.created).localeCompare(a.date+a.created));
   const groups={}; list.forEach(t=>(groups[t.date]=groups[t.date]||[]).push(t));
@@ -399,6 +428,9 @@ function vTx(){
     </div>
     <div class="seg" role="group" aria-label="فیلتر">
       ${[['all','همه'],['out','هزینه‌ها'],['in','درآمدها']].map(([k,n])=>`<button data-act="filter" data-k="${k}" aria-pressed="${st.filter===k}">${n}</button>`).join('')}
+    </div>
+    <div class="seg" role="group" aria-label="حوزه">
+      ${[['all','همه حوزه‌ها'],['personal','شخصی/خانوادگی'],['villa','ویلا'+(villaOut?' · '+short(villaOut):'')]].map(([k,n])=>`<button data-act="scope" data-k="${k}" aria-pressed="${st.scope===k}">${n}</button>`).join('')}
     </div>
     <div>${Object.keys(groups).length? Object.entries(groups).map(([d,ts])=>{
         const o=ts.filter(t=>t.type==='out').reduce((a,t)=>a+t.amount,0);
@@ -422,6 +454,7 @@ function vTasks(){
     </div>
     ${list.length? `<div class="list">${list.map(taskRow).join('')}</div>` : emptyBox(st.tseg==='done'?'کار انجام‌شده‌ای نیست.':'کاری در این بخش نیست. با دکمه + یک کار یا یادآور قبض اضافه کنید.')}
     ${st.tseg==='done'&&list.length?`<button class="btn" data-act="cleardone">پاک کردن کارهای انجام‌شده</button>`:''}
+    ${st.tseg!=='done'?`<div class="tip"><b>آلارم روی آیفون</b><span>کارهای تاریخ‌دار را به تقویم آیفون اضافه کنید تا سر وقت هشدار بدهد، حتی وقتی SayPay بسته است و اینترنت ندارید.</span><button class="btn brand" style="margin-top:6px" data-act="calall">افزودن همه کارهای پیش‌رو به تقویم</button></div>`:''}
   </div>`;
 }
 
@@ -499,15 +532,18 @@ function sheetChoose(){
   </div>`);
 }
 
-function sheetTx(id, type){
-  const t = id? items[id] : {type:type||'out', amount:'', cat:(type==='in'?'salary':'food'), note:'', date:todayISO()};
+function sheetTx(id, type, pre){
+  const t = id? items[id] : Object.assign({type:type||'out', amount:'', cat:(type==='in'?'salary':'food'), note:'', date:todayISO(), scope:'personal'}, pre||{});
   const catOpts = ty => (ty==='in'?IN:OUT).map(c=>[c.k,c.n]);
   openSheet(`<h3>${id?'ویرایش تراکنش':(t.type==='in'?'درآمد جدید':'هزینه جدید')}</h3>
     ${chipsHTML('type',[['out','هزینه'],['in','درآمد']],t.type)}
     <div class="field"><label for="amt">مبلغ (تومان)</label><input class="inp big num" id="amt" inputmode="numeric" placeholder="۰" value="${t.amount?fa(t.amount):''}"><div class="hint" id="amt-h"></div></div>
     <div class="field"><span class="lab">دسته</span><div id="catwrap">${chipsHTML('cat',catOpts(t.type),t.cat)}</div></div>
     <div class="field"><label for="note">توضیح (اختیاری)</label><input class="inp" id="note" maxlength="80" placeholder="مثلاً خرید میوه" value="${esc(t.note)}"></div>
+    <div class="field"><span class="lab">حوزه</span>${chipsHTML('scope',[['personal','شخصی/خانوادگی'],['villa','ویلا']],t.scope||'personal')}</div>
+    <div class="field"><label for="py">طرف حساب (اختیاری)</label><input class="inp" id="py" maxlength="60" placeholder="فروشنده یا گیرنده" value="${esc(t.payee||'')}"></div>
     <div class="field"><label for="dt">تاریخ</label>${dateField('dt',t.date)}</div>
+    ${t.memo?`<div class="small muted">یادداشت: ${esc(t.memo)}</div>`:''}
     <div class="err" id="err"></div>
     <button class="btn pri wide" id="save">${id?'ذخیره تغییرات':'ثبت'}</button>
     ${id?'<button class="btn danger wide" data-del>حذف</button>':''}`, sh=>{
@@ -517,17 +553,20 @@ function sheetTx(id, type){
         const amount=parseAmt(sh.querySelector('#amt').value); const date=sh.querySelector('#dt').value;
         if(!amount){ sh.querySelector('#err').textContent='مبلغ را وارد کنید.'; return; }
         if(!date){ sh.querySelector('#err').textContent='تاریخ را انتخاب کنید.'; return; }
-        const obj={kind:'tx', type:picked(sh,'type'), amount, cat:picked(sh,'cat')||'other', note:sh.querySelector('#note').value.trim(), date, created:t.created||new Date().toISOString()};
+        const obj={kind:'tx', type:picked(sh,'type'), amount, cat:picked(sh,'cat')||'other', note:sh.querySelector('#note').value.trim(), date, scope:picked(sh,'scope')||'personal', created:t.created||new Date().toISOString()};
+        const py=sh.querySelector('#py').value.trim(); if(py) obj.payee=py;
+        ['sub','method','memo','src'].forEach(k=>{ if(t[k] && !(k==='sub' && obj.cat!==t.cat)) obj[k]=t[k]; });
         if(t.sample) obj.sample=true;
         put(id||uid('tx'),obj); closeSheet(); toast(id?'ذخیره شد':'ثبت شد');
       });
       deleteBtn(sh,()=>del(id));
-      if(!id) setTimeout(()=>sh.querySelector('#amt').focus(),250);
+      if(pre && pre.guess){ const e=sh.querySelector('#err'); e.style.color='var(--muted)'; e.textContent='مبلغ را '+money(t.amount)+' در نظر گرفتم؛ اگر درست نیست اصلاحش کنید.'; }
+      if(!id && !pre) setTimeout(()=>sh.querySelector('#amt').focus(),250);
     });
 }
 
-function sheetTask(id){
-  const t = id? items[id] : {title:'', due:todayISO(), time:'', tag:'شخصی', amount:0, done:false};
+function sheetTask(id, pre){
+  const t = id? {id,...items[id]} : Object.assign({title:'', due:todayISO(), time:'', tag:'شخصی', amount:0, done:false, remind:15, repeat:'none'}, pre||{});
   openSheet(`<h3>${id?'ویرایش کار':'کار یا یادآور جدید'}</h3>
     <div class="field"><label for="tt">عنوان</label><input class="inp" id="tt" maxlength="90" placeholder="مثلاً پرداخت قبض برق" value="${esc(t.title)}"></div>
     <div class="field"><span class="lab">نوع</span>${chipsHTML('tag',TAGS.map(x=>[x,x]),t.tag)}</div>
@@ -538,19 +577,28 @@ function sheetTask(id){
       <div class="field"><label for="tm">ساعت (اختیاری)</label><input class="inp" type="time" id="tm" value="${t.time||''}"></div>
       <div class="field"><label for="ta">مبلغ (برای قبض و قسط)</label><input class="inp num" id="ta" inputmode="numeric" placeholder="اختیاری" value="${t.amount?fa(t.amount):''}"><div class="hint" id="ta-h"></div></div>
     </div>
+    <div class="field"><span class="lab">هشدار</span>${chipsHTML('remind',REMIND.map(([k,n])=>[String(k),n]),String(t.remind??15))}</div>
+    <div class="field"><span class="lab">تکرار</span>${chipsHTML('repeat',Object.entries(REPEAT_N),t.repeat||'none')}</div>
     <div class="err" id="err"></div>
     <button class="btn pri wide" id="save">${id?'ذخیره تغییرات':'افزودن'}</button>
+    <button class="btn brand wide" id="cal">ذخیره و افزودن آلارم به تقویم آیفون</button>
     ${id?'<button class="btn danger wide" data-del>حذف</button>':''}`, sh=>{
       wireChips(sh); wireDate(sh,'due'); wireAmount(sh,'ta');
       sh.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{ const d=sh.querySelector('#due'); d.value = b.dataset.quick==='none'?'':addDays(todayISO(),+b.dataset.quick); d.dispatchEvent(new Event('change')); }));
-      sh.querySelector('#save').addEventListener('click',()=>{
+      const save = cal => {
         const title=sh.querySelector('#tt').value.trim(); if(!title){ sh.querySelector('#err').textContent='عنوان کار را بنویسید.'; return; }
-        const obj={kind:'task', title, tag:picked(sh,'tag'), due:sh.querySelector('#due').value, time:sh.querySelector('#tm').value, amount:parseAmt(sh.querySelector('#ta').value), done:!!t.done, created:t.created||new Date().toISOString()};
+        const obj={kind:'task', title, tag:picked(sh,'tag'), due:sh.querySelector('#due').value, time:sh.querySelector('#tm').value, amount:parseAmt(sh.querySelector('#ta').value), done:!!t.done,
+          remind:+(picked(sh,'remind')||15), repeat:picked(sh,'repeat')||'none', created:t.created||new Date().toISOString()};
+        if(cal && !obj.due){ sh.querySelector('#err').textContent='برای آلارم، تاریخ را انتخاب کنید.'; return; }
         if(t.sample) obj.sample=true;
-        put(id||uid('task'),obj); closeSheet(); toast(id?'ذخیره شد':'اضافه شد');
-      });
+        const nid=id||uid('task'); put(nid,obj); closeSheet();
+        if(cal){ openICS([{id:nid,...obj}]); toast('در صفحه بعد «Add All» یا «افزودن» را بزنید'); } else toast(id?'ذخیره شد':'اضافه شد');
+      };
+      sh.querySelector('#save').addEventListener('click',()=>save(false));
+      sh.querySelector('#cal').addEventListener('click',()=>save(true));
       deleteBtn(sh,()=>del(id));
-      if(!id) setTimeout(()=>sh.querySelector('#tt').focus(),250);
+      if(pre && pre.guess && pre.amount){ const e=sh.querySelector('#err'); e.style.color='var(--muted)'; e.textContent='مبلغ را '+money(pre.amount)+' در نظر گرفتم؛ اگر درست نیست اصلاحش کنید.'; }
+      if(!id && !pre) setTimeout(()=>sh.querySelector('#tt').focus(),250);
     });
 }
 
@@ -627,6 +675,385 @@ async function loadSample(){ /* local */
   toast('داده‌های نمونه اضافه شد');
 }
 
+/* ---------- Persian text normalising ---------- */
+const norm = s => toEn(String(s||'')).replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[\u064B-\u0652]/g,'').replace(/\u200c/g,' ').replace(/(\d)[,٬](?=\d{3})/g,'$1').replace(/\s+/g,' ').trim();
+
+/* ---------- categorise from free text ---------- */
+const CAT_RULES = [
+  ['pet',/گربه|سگ|حیوان|پیشی|پت شاپ/],
+  ['digital',/اشتراک|نرم ?افزار|دیجیتال|claude|کلود|vpn|فیلترشکن|اپلیکیشن/i],
+  ['debt',/بدهی|قسط|وام|بازپرداخت|طلب/],
+  ['family',/ماهیانه|ماهانه|کمک ?هزینه|توجیبی/],
+  ['labor',/دستمزد|کارگر|اجرت|مزد/],
+  ['build',/مصالح|آهن|سیمان|لوله|اتصالات|توری|شیروانی|ساخت|میلگرد|آجر|گچ|کاشی|سرامیک/],
+  ['car',/خودرو|ماشین|تعمیرگاه|لاستیک|روغن موتور|سراتو|کیا|پژو|پراید|مکانیک|لوازم یدکی|کارواش/],
+  ['health',/دارو|دکتر|پزشک|درمان|بیمارستان|دندان|آزمایش|عینک/],
+  ['eatout',/رستوران|کافه|شام|ناهار|صبحانه|فست ?فود|پیتزا|شیرینی|کیک|نوشیدنی|پذیرایی|ساندویچ|کباب/],
+  ['food',/نان|نون|میوه|سبزی|گوشت|مرغ|تخم|شیر|ماست|پنیر|برنج|روغن|نخود|حبوبات|قهوه|چای|عسل|سوپر|خواربار|غذا|آب معدنی|بیسکویت|کلوچه|سیب|پیاز|خرما|خرمالو|موز|تنقلات|بربری|لواش|سنگک|تافتون|خوراک/],
+  ['transport',/بنزین|سوخت|گازوئیل|تاکسی|اسنپ|تپسی|مترو|اتوبوس|کرایه|وانت|پارکینگ|عوارض|حمل/],
+  ['home',/شوینده|اسید|مایع|دستمال|اجاره|شارژ ساختمان|خانوار|نظافت|لوازم خانه/],
+  ['bills',/قبض|اینترنت|شارژ سیم|موبایل|تلفن|آبونمان/],
+  ['repair',/تعمیر|لوازم|ابزار|فرغون|پلاستیک|یراق|برق ?کشی|لامپ/],
+  ['personal',/سیگار|تنباکو|آرایشگاه|اصلاح|شخصی|روزمره/],
+  ['shop',/لباس|کفش|پوشاک|دیجی ?کالا|کیف/],
+  ['fun',/سینما|تفریح|سفر|هتل|بلیط|بازی|کنسرت/],
+  ['edu',/کتاب|کلاس|دوره|شهریه|آموزش|مدرسه|دانشگاه/],
+];
+function categorize(...texts){
+  for(const t of texts){ const s=norm(t); if(!s) continue; for(const [k,re] of CAT_RULES) if(re.test(s)) return k; }
+  return 'other';
+}
+const IN_RE = /درآمد|حقوق|دریافت|واریز شد|واریزی به من|فروختم|فروش|سود|اجاره گرفتم/;
+
+/* ---------- numbers in words ---------- */
+const NUMW = {'صفر':0,'یک':1,'یه':1,'دو':2,'سه':3,'چهار':4,'پنج':5,'شش':6,'شیش':6,'هفت':7,'هشت':8,'نه':9,'ده':10,'یازده':11,'دوازده':12,'سیزده':13,'چهارده':14,'پانزده':15,'پونزده':15,'شانزده':16,'شونزده':16,'هفده':17,'هیفده':17,'هجده':18,'هیجده':18,'نوزده':19,'بیست':20,'سی':30,'چهل':40,'پنجاه':50,'شصت':60,'هفتاد':70,'هشتاد':80,'نود':90,'صد':100,'یکصد':100,'یک صد':100,'دویست':200,'سیصد':300,'چهارصد':400,'پانصد':500,'پونصد':500,'ششصد':600,'شیشصد':600,'هفتصد':700,'هشتصد':800,'نهصد':900,'نیم':0.5};
+const SCALE = {'هزار':1e3,'تومنی':0,'میلیون':1e6,'ملیون':1e6,'میلیارد':1e9,'ملیارد':1e9};
+const isNumTok = w => /^\d+(\.\d+)?$/.test(w) || (w in NUMW) || (SCALE[w]>0);
+function readNumberRuns(tokens){
+  const runs=[]; let i=0;
+  while(i<tokens.length){
+    if(!isNumTok(tokens[i]) || (tokens[i]==='نه' && !(tokens[i+1] && isNumTok(tokens[i+1])) && !(tokens[i-1]==='و'))){ i++; continue; }
+    const start=i; let total=0, cur=0, hasScale=false, hasWord=false, lastScale=0;
+    while(i<tokens.length){
+      const w=tokens[i];
+      if(/^\d+(\.\d+)?$/.test(w)){ cur+=parseFloat(w); i++; }
+      else if(w in NUMW){ cur+=NUMW[w]; hasWord=true; i++; }
+      else if(SCALE[w]>0){ total+=(cur||1)*SCALE[w]; cur=0; hasScale=true; lastScale=SCALE[w]; i++; }
+      else if(w==='و' && tokens[i+1] && isNumTok(tokens[i+1])){ i++; }
+      else break;
+    }
+    if(hasScale && cur>0 && cur<1000 && lastScale>=1e6) cur=cur*lastScale/1000;
+    total+=cur;
+    runs.push({start,end:i,value:total,hasScale,hasWord});
+  }
+  return runs;
+}
+
+/* ---------- dates & times in speech ---------- */
+const WEEK = [['پنجشنبه',4],['چهارشنبه',3],['سهشنبه',2],['دوشنبه',1],['یکشنبه',0],['جمعه',5],['شنبه',6]];
+function j2g(jy,jm,jd){
+  jy+=1595; let days=-355668+(365*jy)+(~~(jy/33)*8)+~~(((jy%33)+3)/4)+jd+((jm<7)?(jm-1)*31:((jm-7)*30)+186);
+  let gy=400*~~(days/146097); days%=146097;
+  if(days>36524){ gy+=100*~~(--days/36524); days%=36524; if(days>=365) days++; }
+  gy+=4*~~(days/1461); days%=1461;
+  if(days>365){ gy+=~~((days-1)/365); days=(days-1)%365; }
+  let gd=days+1; const ml=[0,31,((gy%4===0&&gy%100!==0)||(gy%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];
+  let gm; for(gm=0;gm<13&&gd>ml[gm];gm++) gd-=ml[gm];
+  return `${gy}-${pad(gm)}-${pad(gd)}`;
+}
+const jMonthLen = (y,m) => m<=6?31: m<=11?30: (j2g(y,12,30).slice(5)===j2g(y+1,1,1).slice(5)?29:30);
+function addJMonths(iso,n){ const j=jp(iso); let m=j.m-1+n, y=j.y+Math.floor(m/12); m=((m%12)+12)%12+1; return j2g(y,m,Math.min(j.d,jMonthLen(y,m))); }
+
+function parseWhen(s, future){
+  const t=todayISO(); const flat=s.replace(/ /g,'');
+  let date=null, used=[];
+  const rel=[['پس فردا',2],['پسفردا',2],['فردا',1],['پریروز',-2],['دیروز',-1],['امروز',0],['امشب',0],['دیشب',-1]];
+  for(const [w,d] of rel){ if(s.includes(w)){ date=addDays(t,d); used.push(w); break; } }
+  if(!date){ const m=s.match(/(\d{1,2}) ?(?:ام )?(فروردین|اردیبهشت|خرداد|تیر|مرداد|شهریور|مهر|آبان|آذر|دی|بهمن|اسفند)/);
+    if(m){ const T0=jp(t); let y=T0.y; const mi=MONTHS.indexOf(m[2])+1; let iso=j2g(y,mi,+m[1]);
+      if(!future && iso>t) iso=j2g(y-1,mi,+m[1]); if(future && iso<t) iso=j2g(y+1,mi,+m[1]); date=iso; used.push(m[0]); } }
+  if(!date){ const m=s.match(/(\d{3,4})\/(\d{1,2})\/(\d{1,2})/); if(m){ date=+m[1]>1900? `${m[1]}-${pad(m[2])}-${pad(m[3])}` : j2g(+m[1],+m[2],+m[3]); used.push(m[0]); } }
+  if(!date){ for(const [w,wd] of WEEK){ if(flat.includes(w)){ const now=new Date(t+'T12:00:00').getDay(); let diff=(wd-now+7)%7;
+      if(future){ if(diff===0 && /بعد|آینده/.test(s)) diff=7; date=addDays(t,diff); } else { date=addDays(t, diff===0?0:diff-7); }
+      used.push(w); break; } } }
+  let time='';
+  const tm=s.match(/ساعت (\d{1,2})(?:[: ](\d{1,2}))?( و نیم| و ربع)?/) || s.match(/(\d{1,2}):(\d{2})/);
+  if(tm){ let h=+tm[1], mi=tm[2]?+tm[2]:0; if(tm[3]) mi = tm[3].includes('نیم')?30:15;
+    if(/عصر|بعد ?از ?ظهر|شب/.test(s) && h<12) h+=12; else if(/ظهر/.test(s) && h<6) h+=12;
+    if(h<24 && mi<60){ time=`${pad(h)}:${pad(mi)}`; used.push(tm[0]); } }
+  return {date, time, used};
+}
+
+/* ---------- one sentence → tx or task ---------- */
+function parseSentence(raw){
+  const s=norm(raw).replace(/[.!؟?،]+$/,''); if(!s) return null;
+  const isTask = /یادم بنداز|یادآوری|یاد آوری|یادآور|باید|قرار|جلسه|زنگ بزنم|تماس بگیرم|برم|پرداخت کنم|بدم|بخرم|کار دارم|نوبت/.test(s);
+  const pastSpend = /خریدم|گرفتم|دادم|پرداختم|پرداخت کردم|ریختم|زدم|خرج کردم|شد|واریز کردم|حساب کردم|هزینه/.test(s);
+  const isIncome = IN_RE.test(s) && !/دادم|پرداخت/.test(s);
+  const kind = isTask && !pastSpend ? 'task' : 'tx';
+  const when = parseWhen(s, kind==='task');
+  // amount: drop the time and date digits first
+  let rest=s; when.used.forEach(u=>{ rest=rest.replace(u,' '); });
+  const tokens=rest.split(' ').filter(Boolean);
+  const runs=readNumberRuns(tokens).filter(r=>r.value>0);
+  let amount=0, guess=false, run=null;
+  runs.forEach(r=>{ if(!run || r.value>run.value) run=r; });
+  if(run){
+    amount=run.value; const after=tokens[run.end]||'';
+    if(/ریال/.test(after)) amount=Math.round(amount/10);
+    else if(!run.hasScale && amount<1000){ amount*=1000; guess=true; }
+    amount=Math.round(amount);
+  }
+  // description: remove the number run, money words and filler
+  let words=tokens.slice(); if(run) words.splice(run.start, run.end-run.start);
+  let note=words.join(' ').replace(/\b(تومن|تومان|ریال|تومنی)\b/g,' ')
+    .replace(/(تومن|تومان|ریال)/g,' ').replace(/یادم بنداز|یادآوری کن|یادآور|یادآوری/g,' ')
+    .replace(/(^|\s)(صبح|ظهر|عصر|شب|بعد از ظهر|بعدازظهر)(?=\s|$)/g,' ').replace(/\s(شد|بود)$/,'').replace(/^\s*(من|برای|بابت)\s+/,'').replace(/\s+/g,' ').trim();
+  const scope = /ویلا/.test(s)? 'villa':'personal';
+  if(kind==='task'){
+    const tag = /قبض|برق|گاز|آب|اینترنت/.test(s)?'قبض': /قسط|وام/.test(s)?'قسط': /بخرم|خرید/.test(s)?'خرید': /جلسه|اداره|کار/.test(s)?'کار':'شخصی';
+    return {kind:'task', title:note||s, due:when.date||(when.time?todayISO():''), time:when.time, tag, amount, guess, remind:15, repeat:'none', raw};
+  }
+  const type = isIncome? 'in':'out';
+  const cat = type==='in' ? (/حقوق/.test(s)?'salary': /فروش|فروختم|پروژه|آزاد/.test(s)?'free':'other_in') : categorize(note,s);
+  return {kind:'tx', type, amount, cat, note:note||s, date:when.date||todayISO(), scope, guess, raw};
+}
+function parseAll(text){
+  return String(text||'').split(/\n|\.\s|؛|(?:\s+و\s+بعد\s+)/).map(x=>x.trim()).filter(Boolean).map(parseSentence).filter(Boolean);
+}
+window.__sp = {parseAll, parseSentence, categorize, j2g};
+
+/* ---------- quick entry UI ---------- */
+function quickBox(){
+  return `<section class="sec qe-sec">
+    <div class="qe">
+      <label for="qe" class="qe-lab"><span class="mic" aria-hidden="true"></span>بگو یا بنویس</label>
+      <textarea id="qe" rows="2" placeholder="مثلاً: نون بربری ۱۴۵ هزار تومن خریدم&#10;فردا ساعت ۱۰ صبح قسط وام رو بدم">${esc(st.qe||'')}</textarea>
+      <div class="qe-row"><span class="small muted">برای گفتن با صدا، روی کادر بزنید و میکروفون کیبورد Gboard را بزنید.</span><button class="btn pri" data-act="qe-go">ثبت</button></div>
+    </div></section>`;
+}
+function runQuick(){
+  const list=parseAll(st.qe);
+  if(!list.length){ toast('اول یک جمله بنویسید یا بگویید'); return; }
+  if(list.length===1){ const p=list[0]; st.qe='';
+    if(p.kind==='task') sheetTask(null,p); else sheetTx(null,p.type,p); return; }
+  sheetReview(list);
+}
+function sheetReview(list){
+  const row=(p,i)=> p.kind==='task'
+    ? `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b>${esc(p.title)}</b><span class="s">کار · ${p.due?dayLabel(p.due):'بدون تاریخ'}${p.time?' · '+toFa(p.time):''}</span></span></label>`
+    : `<label class="rv"><input type="checkbox" data-i="${i}" checked><span class="main"><b>${esc(p.note)}</b><span class="s">${p.type==='in'?'درآمد':'هزینه'} · ${esc(catOf(p.cat).n)} · ${dayLabel(p.date)}</span></span><span class="amt num ${p.type}">${p.amount?fa(p.amount):'—'}</span></label>`;
+  openSheet(`<h3>${fa(list.length)} مورد پیدا شد</h3>
+    <div class="small muted">موارد را بررسی کنید. مواردی که مبلغ ندارند ثبت نمی‌شوند؛ بعداً می‌توانید آن‌ها را جدا وارد کنید.</div>
+    <div class="list">${list.map(row).join('')}</div>
+    <button class="btn pri wide" id="ok">ثبت موارد انتخاب‌شده</button>`, sh=>{
+      sh.querySelector('#ok').addEventListener('click',()=>{
+        let n=0; const now=new Date().toISOString();
+        sh.querySelectorAll('input[data-i]').forEach(cb=>{ if(!cb.checked) return; const p=list[+cb.dataset.i];
+          if(p.kind==='task'){ items[uid('task')]={kind:'task',title:p.title,tag:p.tag,due:p.due,time:p.time,amount:p.amount,done:false,remind:15,repeat:'none',created:now}; n++; }
+          else if(p.amount){ items[uid('tx')]={kind:'tx',type:p.type,amount:p.amount,cat:p.cat,note:p.note,date:p.date,scope:p.scope,created:now}; n++; } });
+        saveLocal(); st.qe=''; closeSheet(); render(); toast(fa(n)+' مورد ثبت شد');
+      });
+    });
+}
+
+/* ---------- saving a file on the phone ---------- */
+async function saveFile(blob, name, title){
+  try{ const file=new File([blob],name,{type:blob.type});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file],title}); return true; } }
+  catch(e){ if(e && e.name==='AbortError') return false; }
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },2000); return true;
+}
+
+/* ---------- tiny zip (store) + xlsx writer ---------- */
+const CRC_T=(()=>{ const t=new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c = c&1 ? 0xEDB88320^(c>>>1) : c>>>1; t[n]=c>>>0; } return t; })();
+const crc32 = b => { let c=0xFFFFFFFF; for(let i=0;i<b.length;i++) c=CRC_T[(c^b[i])&255]^(c>>>8); return (c^0xFFFFFFFF)>>>0; };
+function zipStore(files){
+  const enc=new TextEncoder(); const parts=[], central=[]; let off=0;
+  files.forEach(([name,text])=>{
+    const nb=enc.encode(name), db=typeof text==='string'?enc.encode(text):text, crc=crc32(db);
+    const h=new DataView(new ArrayBuffer(30)); h.setUint32(0,0x04034b50,true); h.setUint16(4,20,true); h.setUint16(6,0x0800,true); h.setUint16(8,0,true);
+    h.setUint32(14,crc,true); h.setUint32(18,db.length,true); h.setUint32(22,db.length,true); h.setUint16(26,nb.length,true);
+    parts.push(new Uint8Array(h.buffer),nb,db);
+    const c=new DataView(new ArrayBuffer(46)); c.setUint32(0,0x02014b50,true); c.setUint16(4,20,true); c.setUint16(6,20,true); c.setUint16(8,0x0800,true);
+    c.setUint32(16,crc,true); c.setUint32(20,db.length,true); c.setUint32(24,db.length,true); c.setUint16(28,nb.length,true); c.setUint32(42,off,true);
+    central.push(new Uint8Array(c.buffer),nb); off+=30+nb.length+db.length;
+  });
+  const csize=central.reduce((a,b)=>a+b.length,0);
+  const e=new DataView(new ArrayBuffer(22)); e.setUint32(0,0x06054b50,true); e.setUint16(8,files.length,true); e.setUint16(10,files.length,true); e.setUint32(12,csize,true); e.setUint32(16,off,true);
+  return new Blob([...parts,...central,new Uint8Array(e.buffer)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+const xesc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,'');
+const colL = i => { let s=''; i++; while(i){ const m=(i-1)%26; s=String.fromCharCode(65+m)+s; i=Math.floor((i-1)/26); } return s; };
+function sheetXML(rows, widths){
+  const body=rows.map((r,ri)=>`<row r="${ri+1}">`+r.map((v,ci)=>{ if(v===null||v===undefined||v==='') return ''; const ref=colL(ci)+(ri+1);
+    if(typeof v==='number') return `<c r="${ref}" s="2"><v>${v}</v></c>`;
+    return `<c r="${ref}" t="inlineStr"${ri===0?' s="1"':''}><is><t xml:space="preserve">${xesc(v)}</t></is></c>`; }).join('')+'</row>').join('');
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView rightToLeft="1" workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>${widths.map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('')}</cols><sheetData>${body}</sheetData></worksheet>`;
+}
+function xlsxBlob(sheets){
+  const files=[
+    ['[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`],
+    ['_rels/.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`],
+    ['xl/workbook.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s,i)=>`<sheet name="${xesc(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`],
+    ['xl/_rels/workbook.xml.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`],
+    ['xl/styles.xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Tahoma"/></font><font><b/><sz val="11"/><name val="Tahoma"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE3C58D"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="3" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`]
+  ];
+  sheets.forEach((s,i)=>files.push([`xl/worksheets/sheet${i+1}.xml`, sheetXML(s.rows,s.widths)]));
+  return zipStore(files);
+}
+const jDate = iso => { if(!iso) return ''; const j=jp(iso); return `${j.y}/${pad(j.m)}/${pad(j.d)}`; };
+const SCOPE_N = {personal:'شخصی/خانوادگی', villa:'ویلا'};
+async function exportExcel(){
+  const tx=all('tx').sort((a,b)=>(a.date+(a.created||'')).localeCompare(b.date+(b.created||'')));
+  if(!tx.length && !all('task').length){ toast('هنوز چیزی برای خروجی نیست'); return; }
+  const rows=[['ردیف','تاریخ شمسی','نوع','حوزه','دسته‌بندی','شرح','طرف حساب','مبلغ (تومان)','روش پرداخت','یادداشت']];
+  tx.forEach((t,i)=>rows.push([i+1, jDate(t.date), t.type==='in'?'درآمد':'هزینه', SCOPE_N[t.scope||'personal'], t.sub||catOf(t.cat).n, t.note||'', t.payee||'', t.amount, t.method||'', t.memo||'']));
+  const months={}; tx.forEach(t=>{ const j=jp(t.date), k=j.y*100+j.m; const o=months[k]||(months[k]={y:j.y,m:j.m,i:0,o:0,v:0}); if(t.type==='in') o.i+=t.amount; else { o.o+=t.amount; if(t.scope==='villa') o.v+=t.amount; } });
+  const sum=[['ماه','درآمد','هزینه کل','هزینه ویلا','مانده']];
+  Object.keys(months).sort().forEach(k=>{ const o=months[k]; sum.push([mLabel(o.y,o.m), o.i, o.o, o.v, o.i-o.o]); });
+  const bycat={}; tx.filter(t=>t.type==='out').forEach(t=>{ const n=catOf(t.cat).n; bycat[n]=(bycat[n]||0)+t.amount; });
+  sum.push([]); sum.push(['دسته','جمع هزینه']); Object.entries(bycat).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>sum.push([n,v]));
+  const tasks=[['عنوان','نوع','تاریخ','ساعت','مبلغ (تومان)','تکرار','وضعیت']];
+  all('task').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).forEach(t=>tasks.push([t.title,t.tag||'',jDate(t.due),t.time||'',t.amount||'',REPEAT_N[t.repeat||'none'],t.done?'انجام شد':'باز']));
+  const blob=xlsxBlob([
+    {name:'دفتر مالی',rows,widths:[6,12,8,15,22,44,20,15,14,40]},
+    {name:'خلاصه',rows:sum,widths:[22,16,16,16,16]},
+    {name:'کارها',rows:tasks,widths:[36,10,12,8,15,10,10]}]);
+  const j=jp(todayISO());
+  await saveFile(blob, `SayPay_${j.y}-${pad(j.m)}-${pad(j.d)}.xlsx`, 'خروجی SayPay');
+}
+
+/* ---------- xlsx / csv reader ---------- */
+async function inflateRaw(u8){
+  const ds=new DecompressionStream('deflate-raw'); const s=new Blob([u8]).stream().pipeThrough(ds);
+  return new Uint8Array(await new Response(s).arrayBuffer());
+}
+async function unzip(buf){
+  const u8=new Uint8Array(buf), dv=new DataView(buf); let e=-1;
+  for(let i=u8.length-22;i>=Math.max(0,u8.length-66000);i--) if(dv.getUint32(i,true)===0x06054b50){ e=i; break; }
+  if(e<0) throw new Error('zip');
+  const n=dv.getUint16(e+10,true); let p=dv.getUint32(e+16,true); const out={}; const dec=new TextDecoder();
+  for(let k=0;k<n;k++){
+    const method=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true), nl=dv.getUint16(p+28,true), xl=dv.getUint16(p+30,true), cl=dv.getUint16(p+32,true), lo=dv.getUint32(p+42,true);
+    const name=dec.decode(u8.subarray(p+46,p+46+nl)); p+=46+nl+xl+cl;
+    const start=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true); const data=u8.subarray(start,start+csize);
+    out[name]= async()=> method===0? data : await inflateRaw(data);
+  }
+  return out;
+}
+async function readXlsx(buf){
+  const z=await unzip(buf); const dec=new TextDecoder(); const xml=async n=> z[n]? new DOMParser().parseFromString(dec.decode(await z[n]()),'application/xml') : null;
+  const ss=[]; const sd=await xml('xl/sharedStrings.xml');
+  if(sd) for(const si of sd.getElementsByTagName('si')) ss.push(Array.from(si.getElementsByTagName('t')).map(t=>t.textContent).join(''));
+  const sheets=[];
+  for(const name of Object.keys(z).filter(n=>/^xl\/worksheets\/sheet\d+\.xml$/.test(n)).sort()){
+    const d=await xml(name); const rows=[];
+    for(const r of d.getElementsByTagName('row')){
+      const row=[]; let auto=0;
+      for(const c of r.getElementsByTagName('c')){
+        const ref=c.getAttribute('r'); let ci=auto;
+        if(ref){ const L=ref.replace(/\d+/g,''); ci=0; for(const ch of L) ci=ci*26+(ch.charCodeAt(0)-64); ci--; }
+        auto=ci+1; const t=c.getAttribute('t'); const v=c.getElementsByTagName('v')[0];
+        let val = t==='s'? ss[+(v&&v.textContent)] : t==='inlineStr'? Array.from(c.getElementsByTagName('t')).map(x=>x.textContent).join('') : v? v.textContent : '';
+        if((t===null||t==='n') && val!=='' && !isNaN(+val)) val=+val;
+        row[ci]=val;
+      }
+      rows.push(row);
+    }
+    sheets.push(rows);
+  }
+  return sheets;
+}
+function readCsv(text){
+  const rows=[]; let row=[], f='', q=false;
+  const first=text.split('\n')[0]; const sep = (first.match(/;/g)||[]).length>(first.match(/,/g)||[]).length? ';' : (first.includes('\t')?'\t':',');
+  for(let i=0;i<text.length;i++){ const ch=text[i];
+    if(q){ if(ch==='"'){ if(text[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=ch; }
+    else if(ch==='"') q=true; else if(ch===sep){ row.push(f); f=''; } else if(ch==='\n'){ row.push(f.replace(/\r$/,'')); rows.push(row); row=[]; f=''; } else f+=ch; }
+  if(f||row.length){ row.push(f); rows.push(row); }
+  return [rows];
+}
+function cellDate(v, prev){
+  if(typeof v==='number' && v>20000 && v<80000){ const d=new Date(Date.UTC(1899,11,30)+v*864e5); return d.toISOString().slice(0,10); }
+  const s=norm(v); if(!s) return prev;
+  let m=s.match(/(\d{2,4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})/);
+  if(m){ let y=+m[1]; if(y<100) y+=1400; if(y>1900) return `${y}-${pad(m[2])}-${pad(m[3])}`; if(y>1300&&y<1500) return j2g(y,+m[2],+m[3]); }
+  const w=parseWhen(s,false); return w.date||prev;
+}
+function mapSheet(rows){
+  const H={date:/تاریخ|^روز$|date/i, scope:/حوزه|بخش/, cat:/دسته|گروه|category/i, desc:/شرح|توضیح|عنوان|بابت|^مورد|کالا|description|item/i,
+    payee:/طرف|فروشنده|گیرنده|پرداخت ?به/, method:/روش|نحوه/, memo:/یادداشت|ملاحظات|note/i, type:/^نوع$|type/i, amount:/مبلغ|قیمت|تومان|ریال|amount|price|cost|هزینه|جمع/i};
+  for(let r=0;r<Math.min(rows.length,12);r++){
+    const cols={}; (rows[r]||[]).forEach((h,ci)=>{ const s=norm(h); if(!s) return;
+      for(const k of ['date','scope','cat','desc','payee','method','memo','type','amount']) if(H[k].test(s) && cols[k]===undefined){ cols[k]=ci; if(k==='amount') cols.amountH=s; break; } });
+    if(cols.date!==undefined && cols.amount!==undefined) return {head:r, cols};
+  }
+  return null;
+}
+function rowsToTx(rows, m){
+  const c=m.cols, out=[]; let prev=null; const mult = /ریال/.test(c.amountH||'')? 0.1 : /هزار/.test(c.amountH||'')? 1000 : 1;
+  for(let r=m.head+1;r<rows.length;r++){
+    const row=rows[r]||[]; const g=k=> c[k]===undefined? '' : (row[c[k]]??'');
+    const text=row.map(x=>norm(x)).join(' ');
+    if(/جمع کل|مجموع|^جمع|total/i.test(norm(g('desc'))+' '+norm(row[0]))) continue;
+    let a=g('amount'); a= typeof a==='number'? a : parseAmt(a); a=Math.round(a*mult); if(!a) continue;
+    const date=cellDate(g('date'),prev); if(!date) continue; prev=date;
+    const catT=String(g('cat')||''), desc=String(g('desc')||'').trim();
+    const type = IN_RE.test(norm(catT+' '+g('type'))) ? 'in':'out';
+    out.push({kind:'tx', type, amount:a, cat: type==='in'?'other_in':categorize(catT,desc), sub:catT.trim()||undefined, note:desc||catT||'بدون شرح', date,
+      scope:/ویلا/.test(norm(g('scope')))?'villa':'personal', payee:String(g('payee')||'').trim()||undefined, method:String(g('method')||'').trim()||undefined, memo:String(g('memo')||'').trim()||undefined, src:'import'});
+  }
+  return out;
+}
+function sheetImport(){
+  openSheet(`<h3>ورود از اکسل</h3>
+    <div class="small muted">فایل اکسل (‎.xlsx) یا ‎.csv را انتخاب کنید. ستون‌های تاریخ و مبلغ لازم است؛ شرح، دسته، حوزه، طرف حساب و یادداشت هم اگر باشند خوانده می‌شوند.</div>
+    <input class="inp" type="file" id="xf" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv">
+    <div id="xr"></div><div class="err" id="err"></div>
+    <button class="btn pri wide" id="go" disabled>وارد کردن</button>`, sh=>{
+      let ready=[]; const err=sh.querySelector('#err'), go=sh.querySelector('#go'), xr=sh.querySelector('#xr');
+      sh.querySelector('#xf').addEventListener('change', async e=>{
+        const f=e.target.files[0]; if(!f) return; err.textContent=''; xr.innerHTML='<div class="small muted">در حال خواندن…</div>'; go.disabled=true;
+        try{
+          let sheets;
+          if(/\.csv$/i.test(f.name)) sheets=readCsv(await f.text());
+          else { if(!window.DecompressionStream) throw new Error('old'); sheets=await readXlsx(await f.arrayBuffer()); }
+          let best=[]; sheets.forEach(rows=>{ const m=mapSheet(rows); if(m){ const t=rowsToTx(rows,m); if(t.length>best.length) best=t; } });
+          if(!best.length) throw new Error('nocols');
+          const have=new Set(all('tx').map(t=>t.date+'|'+t.amount+'|'+(t.note||'')));
+          const dup=best.filter(t=>have.has(t.date+'|'+t.amount+'|'+t.note)); ready=best.filter(t=>!have.has(t.date+'|'+t.amount+'|'+t.note));
+          const total=ready.reduce((a,t)=>a+(t.type==='out'?t.amount:0),0); const dates=ready.map(t=>t.date).sort();
+          const villa=ready.filter(t=>t.scope==='villa').length;
+          xr.innerHTML = ready.length? `<div class="tip"><b>${fa(ready.length)} هزینه آماده ورود</b>
+            <span>از ${dayLabel(dates[0])} تا ${dayLabel(dates[dates.length-1])} · جمع ${money(total)}${villa?' · '+fa(villa)+' مورد ویلا':''}${dup.length?' · '+fa(dup.length)+' مورد تکراری کنار گذاشته شد':''}</span></div>
+            <div class="list">${ready.slice(0,5).map(t=>`<div class="item"><span class="dot" style="background:${col(catOf(t.cat).c)}">${esc(catOf(t.cat).n.slice(0,1))}</span><span class="main"><span class="t" style="display:block">${esc(t.note)}</span><span class="s">${esc(catOf(t.cat).n)} · ${dayLabel(t.date)}</span></span><span class="amt num">${fa(t.amount)}</span></div>`).join('')}</div>`
+            : `<div class="tip"><b>همه این موارد قبلاً وارد شده‌اند.</b></div>`;
+          go.disabled=!ready.length; go.textContent=`وارد کردن ${fa(ready.length)} مورد`;
+        }catch(x){ xr.innerHTML=''; err.textContent = x.message==='old'? 'برای خواندن اکسل، iOS را به نسخه ۱۶٫۴ یا جدیدتر به‌روز کنید، یا فایل را CSV ذخیره کنید.' : x.message==='nocols'? 'ستون «تاریخ» و «مبلغ» در این فایل پیدا نشد.' : 'این فایل خوانده نشد. مطمئن شوید فایل ‎.xlsx یا ‎.csv است.'; }
+      });
+      go.addEventListener('click',()=>{ const now=new Date().toISOString();
+        ready.forEach(t=>{ Object.keys(t).forEach(k=>t[k]===undefined&&delete t[k]); items[uid('tx')]={...t,created:now}; });
+        saveLocal(); const d=ready.map(t=>t.date).sort().pop(); if(d){ const j=jp(d); st.vy=j.y; st.vm=j.m; }
+        closeSheet(); st.tab='tx'; render(); toast(fa(ready.length)+' مورد وارد شد'); });
+    });
+}
+
+/* ---------- calendar alarms (.ics) ---------- */
+const REPEAT_N = {none:'بدون تکرار', weekly:'هفتگی', monthly:'ماهانه'};
+const REMIND = [[0,'سر وقت'],[15,'۱۵ دقیقه قبل'],[60,'۱ ساعت قبل'],[1440,'۱ روز قبل']];
+const icsEsc = s => String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+function icsFold(line){ const out=[]; let cur=''; for(const ch of line){ if((cur+ch).length>60){ out.push(cur); cur=' '+ch; } else cur+=ch; } out.push(cur); return out.join('\r\n'); }
+function icsEvents(t){
+  const dates=[t.due]; if(t.repeat==='monthly') for(let i=1;i<12;i++) dates.push(addJMonths(t.due,i));
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  const title=t.title+(t.amount?' — '+fa(t.amount)+' تومان':'');
+  return dates.map((d,i)=>{
+    const L=['BEGIN:VEVENT',`UID:${t.id||uid('t')}-${i}@saypay`,`DTSTAMP:${stamp}`];
+    const dd=d.replace(/-/g,'');
+    if(t.time){ const [h,mi]=t.time.split(':'); const st0=`${dd}T${h}${mi}00`; const e=new Date(`${d}T${t.time}:00`); e.setMinutes(e.getMinutes()+30);
+      L.push(`DTSTART:${st0}`,`DTEND:${isoOf(e).replace(/-/g,'')}T${pad(e.getHours())}${pad(e.getMinutes())}00`); }
+    else L.push(`DTSTART;VALUE=DATE:${dd}`,`DTEND;VALUE=DATE:${addDays(d,1).replace(/-/g,'')}`);
+    if(t.repeat==='weekly') L.push('RRULE:FREQ=WEEKLY;COUNT=52');
+    L.push('SUMMARY:'+icsEsc(title),'DESCRIPTION:'+icsEsc('از SayPay · '+(t.tag||'')));
+    const trig = t.time ? (+(t.remind??15)===0?'-PT0M': `-PT${+(t.remind??15)}M`) : (+(t.remind??15)>=1440?'-PT15H':'PT9H');
+    L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(title),'TRIGGER:'+trig,'END:VALARM','END:VEVENT');
+    return L.map(icsFold).join('\r\n');
+  }).join('\r\n');
+}
+function openICS(list){
+  const body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//SayPay//FA','CALSCALE:GREGORIAN','METHOD:PUBLISH'].join('\r\n')+'\r\n'+list.map(icsEvents).join('\r\n')+'\r\nEND:VCALENDAR\r\n';
+  const url=URL.createObjectURL(new Blob([body],{type:'text/calendar;charset=utf-8'}));
+  const a=document.createElement('a'); a.href=url; a.download='saypay-reminder.ics'; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },4000);
+}
+function calendarAll(){
+  const list=all('task').filter(t=>!t.done && t.due && t.due>=todayISO());
+  if(!list.length){ toast('کار پیش‌رویی با تاریخ ندارید'); return; }
+  openICS(list); toast(fa(list.length)+' یادآور برای تقویم آماده شد');
+}
+
 /* ---------- toast ---------- */
 let tt; function toast(m){ clearTimeout(tt); let el=document.querySelector('.toast'); if(!el){ el=document.createElement('div'); el.className='toast'; el.setAttribute('role','status'); document.body.appendChild(el); }
   el.textContent=m; tt=setTimeout(()=>el.remove(),2000); }
@@ -647,7 +1074,15 @@ document.addEventListener('click',e=>{
     case 'edit-goal': sheetGoal(id); break;
     case 'deposit': sheetDeposit(id); break;
     case 'budget': sheetBudget(a.dataset.k); break;
-    case 'toggle': { const t=items[id]; if(t) put(id,{...t,done:!t.done}); break; }
+    case 'toggle': { const t=items[id]; if(!t) break; put(id,{...t,done:!t.done});
+      if(!t.done && t.due && t.repeat && t.repeat!=='none'){ const nd = t.repeat==='monthly'? addJMonths(t.due,1) : addDays(t.due,7);
+        put(uid('task'),{...t,done:false,due:nd,created:new Date().toISOString()}); toast('نوبت بعدی: '+dayLabel(nd)); }
+      break; }
+    case 'qe-go': runQuick(); break;
+    case 'export': exportExcel(); break;
+    case 'import': sheetImport(); break;
+    case 'calall': calendarAll(); break;
+    case 'scope': st.scope=a.dataset.k; render(); break;
     case 'filter': st.filter=a.dataset.k; render(); break;
     case 'tseg': st.tseg=a.dataset.k; render(); break;
     case 'vm': { const p=shiftM(st.vy,st.vm,+a.dataset.d); st.vy=p.y; st.vm=p.m; render(); break; }
@@ -658,6 +1093,7 @@ document.addEventListener('click',e=>{
     case 'restore': sheetRestore(); break;
   }
 });
+document.addEventListener('input',e=>{ if(e.target && e.target.id==='qe') st.qe=e.target.value; });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
 
 initStore();
